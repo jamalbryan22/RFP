@@ -1,0 +1,36 @@
+# Build & output folders
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+.vs/
+.vscode/
+*.user
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# Configurations & Secrets
+**/secrets.json
+**/appsettings.*.json
+
+# SQLite database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# JetBrains Rider
+.idea/
+
+# Azure & Codespaces
+/.devcontainer/
+azure-pipelines.yml
+terraform.tfstate
+terraform.tfstate.backup
