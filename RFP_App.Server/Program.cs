@@ -22,7 +22,14 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 // Configure JWT Authentication
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]);
+var secretKey = builder.Configuration["Jwt:SecretKey"];
+if (string.IsNullOrEmpty(secretKey))
+{
+    throw new ArgumentNullException("Jwt:SecretKey configuration value is required.");
+}
+
+var key = Encoding.UTF8.GetBytes(secretKey);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
