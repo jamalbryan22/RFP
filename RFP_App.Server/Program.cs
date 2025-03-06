@@ -2,15 +2,19 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using RFP_APP.Server.Data;
+using RFP_APP.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure SQLite Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlite(connectionString)
+           .UseLazyLoadingProxies());  // Use lazy loading proxies here
 
 // Configure Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
