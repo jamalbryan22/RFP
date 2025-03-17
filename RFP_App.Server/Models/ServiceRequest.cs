@@ -49,7 +49,7 @@ namespace RFP_APP.Server.Models
         public virtual ApplicationUser? Creator { get; set; }
 
         // Navigation property for proposals submitted to this request
-        public List<Proposal>? Proposals { get; set; }
+        public virtual List<Proposal>? Proposals { get; set; }
 
         public enum ServiceRequestType
         {

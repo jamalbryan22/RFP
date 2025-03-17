@@ -57,8 +57,8 @@ namespace RFP_APP.Server.Models
       public required DateTime AccountCreated { get; set; }
 
       // Navigation Properties (if using EF Core)
-      public ICollection<ServiceRequest>? ServiceRequest { get; set; }  // RFPs posted by this user  
+      public virtual ICollection<ServiceRequest>? ServiceRequest { get; set; }  // RFPs posted by this user  
 
-      public ICollection<Proposal>? Proposals { get; set; }  // Bids placed by this user  
+      public virtual ICollection<Proposal>? Proposals { get; set; }  // Bids placed by this user  
    }
 }

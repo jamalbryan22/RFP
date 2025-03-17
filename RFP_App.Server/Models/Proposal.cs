@@ -24,7 +24,7 @@ namespace RFP_APP.Server.Models
         public required int ServiceRequestId { get; set; }
 
         [ForeignKey("ServiceRequestId")]
-        public ServiceRequest? ServiceRequest { get; set; }
+        public virtual ServiceRequest? ServiceRequest { get; set; }
 
         [Required]
         public required string CreatorId { get; set; }
