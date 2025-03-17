@@ -13,7 +13,6 @@ namespace RFP_APP.Server.Data
       }
       public DbSet<Message> Messages { get; set; }
       public DbSet<Notification> Notifications { get; set; }
-      public DbSet<Payment> Payments { get; set; }
       public DbSet<Proposal> Proposals { get; set; }
       public DbSet<Review> Reviews { get; set; }
       public DbSet<ServiceRequest> ServiceRequests { get; set; }
@@ -33,18 +32,6 @@ namespace RFP_APP.Server.Data
                 .HasOne(m => m.Receiver)
                 .WithMany()
                 .HasForeignKey(m => m.ReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Payer)
-                .WithMany()
-                .HasForeignKey(p => p.PayerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Payee)
-                .WithMany()
-                .HasForeignKey(p => p.PayeeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Review>()

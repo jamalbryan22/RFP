@@ -9,7 +9,7 @@ namespace RFP_APP.Server.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(1000)]  // Adjust length according to the expected size of the description
+        [StringLength(1000)]  
         public required string Description { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Bid Amount must be a positive value")]

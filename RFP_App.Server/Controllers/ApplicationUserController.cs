@@ -61,6 +61,7 @@ public class ApplicationUserController : ControllerBase
 
         var user = await _userManager.FindByEmailAsync(model.Email);
         if (user == null) return Unauthorized(new { message = "Invalid credentials" });
+        if (user.UserName == null) return Unauthorized(new { message = "Username is null" });
 
         var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
 
@@ -84,10 +85,10 @@ public class ApplicationUserController : ControllerBase
     // Get all users (Admin only, JWT protected)
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
+    public Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
     {
         var users = _userManager.Users.ToList();
-        return Ok(users);
+        return Task.FromResult<ActionResult<IEnumerable<ApplicationUser>>>(Ok(users));
     }
 
     // Delete a user (Admin only, JWT protected)
@@ -109,7 +110,29 @@ public class ApplicationUserController : ControllerBase
     // JWT Token Generation
     private async Task<string> GenerateJwtToken(ApplicationUser user)
     {
+        // Validate user object
+        if (user == null)
+        {
+            throw new ArgumentNullException(nameof(user), "User cannot be null.");
+        }
+        
+        if (string.IsNullOrWhiteSpace(user.Id) || string.IsNullOrWhiteSpace(user.Email))
+        {
+            throw new ArgumentException("User ID and email cannot be null or empty.");
+        }
+
+        // Retrieve user roles
         var userRoles = await _userManager.GetRolesAsync(user);
+        if (userRoles == null)
+        {
+            throw new InvalidOperationException("Failed to retrieve user roles.");
+        }
+
+        if(string.IsNullOrEmpty(user.Email))
+        {
+            throw new ArgumentException("User email cannot be null or empty.", nameof(user.Email));
+        }
+
         var authClaims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -120,11 +143,22 @@ public class ApplicationUserController : ControllerBase
         // Add user roles to claims
         authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+        // Validate JWT configuration settings
+        string jwtSecret = _configuration["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret is missing.");
+        string jwtIssuer = _configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("JWT Issuer is missing.");
+        string jwtAudience = _configuration["Jwt:Audience"] ?? throw new InvalidOperationException("JWT Audience is missing.");
+
+
+        if (string.IsNullOrWhiteSpace(jwtSecret) || string.IsNullOrWhiteSpace(jwtIssuer) || string.IsNullOrWhiteSpace(jwtAudience))
+        {
+            throw new InvalidOperationException("JWT configuration values cannot be null or empty.");
+        }
+
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
 
         var token = new JwtSecurityToken(
-            issuer: _configuration["Jwt:Issuer"],
-            audience: _configuration["Jwt:Audience"],
+            issuer: jwtIssuer,
+            audience: jwtAudience,
             expires: DateTime.UtcNow.AddHours(3),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)

@@ -78,6 +78,13 @@ using (var scope = app.Services.CreateScope())
     // Seed admin user
     var adminEmail = builder.Configuration["AdminCredentials:Email"];
     var adminPassword = builder.Configuration["AdminCredentials:Password"];
+
+    // Check if adminEmail or adminPassword is null or empty
+    if (string.IsNullOrEmpty(adminEmail) || string.IsNullOrEmpty(adminPassword))
+    {
+        throw new ArgumentNullException("Admin credentials are missing in the configuration.");
+    }
+
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
     if (adminUser == null)

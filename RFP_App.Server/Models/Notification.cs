@@ -12,7 +12,7 @@ namespace RFP_APP.Server.Models
         [StringLength(500)] 
         public required string Message { get; set; }
 
-        public bool IsRead { get; set; }
+        public required bool IsRead { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
