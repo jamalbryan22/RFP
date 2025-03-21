@@ -11,7 +11,7 @@ using RFP_APP.Server.Data;
 namespace RFP_APP.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250317081205_InitialCreate")]
+    [Migration("20250321055106_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -275,10 +275,10 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            AccountCreated = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(135),
+                            AccountCreated = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(3677),
                             ActiveBids = 0,
                             CompletedProjects = 0,
-                            ConcurrencyStamp = "af59555b-cc03-4962-ab59-3c5559977110",
+                            ConcurrencyStamp = "c55a1391-6af3-4d66-b85d-e61a780bd23c",
                             DateOfBirth = new DateTime(1995, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user1@example.com",
                             EmailConfirmed = false,
@@ -288,7 +288,7 @@ namespace RFP_APP.Server.Migrations
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Rating = 0m,
-                            SecurityStamp = "f0823d35-07a4-4712-9467-83b822ff2a06",
+                            SecurityStamp = "7879ac4a-4bb9-4e0d-a55c-2146b694be18",
                             TwoFactorEnabled = false,
                             UserName = "user1@example.com"
                         },
@@ -296,10 +296,10 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            AccountCreated = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(161),
+                            AccountCreated = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(3718),
                             ActiveBids = 0,
                             CompletedProjects = 0,
-                            ConcurrencyStamp = "66eb1667-fd02-4d4e-b03e-4917b1178c54",
+                            ConcurrencyStamp = "ab0f5273-d3ee-44b7-b701-446fafd28004",
                             DateOfBirth = new DateTime(1992, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user2@example.com",
                             EmailConfirmed = false,
@@ -309,7 +309,7 @@ namespace RFP_APP.Server.Migrations
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Rating = 0m,
-                            SecurityStamp = "8e0c1267-330d-4e6b-b7f9-8a41325ae501",
+                            SecurityStamp = "f312228a-aacc-4b4c-aaf8-f272aadeb582",
                             TwoFactorEnabled = false,
                             UserName = "user2@example.com"
                         },
@@ -317,10 +317,10 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            AccountCreated = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(185),
+                            AccountCreated = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(3754),
                             ActiveBids = 0,
                             CompletedProjects = 0,
-                            ConcurrencyStamp = "5a97755f-4d10-4bdd-bb93-88fe0a22344a",
+                            ConcurrencyStamp = "ea63450a-e930-4eb2-8c4d-3f43b0eb78fb",
                             DateOfBirth = new DateTime(1988, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user3@example.com",
                             EmailConfirmed = false,
@@ -330,7 +330,7 @@ namespace RFP_APP.Server.Migrations
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Rating = 0m,
-                            SecurityStamp = "d2da43db-b156-4169-a7f0-d821d41424b9",
+                            SecurityStamp = "8f4c4a29-8b5e-4126-abfb-e585fdcf16ba",
                             TwoFactorEnabled = false,
                             UserName = "user3@example.com"
                         },
@@ -338,10 +338,10 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = "5",
                             AccessFailedCount = 0,
-                            AccountCreated = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(207),
+                            AccountCreated = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(3787),
                             ActiveBids = 0,
                             CompletedProjects = 0,
-                            ConcurrencyStamp = "a973a51a-3c44-41a7-871a-f94f71303465",
+                            ConcurrencyStamp = "d8317ee3-9da2-429f-abaa-06357f296c81",
                             DateOfBirth = new DateTime(2000, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user4@example.com",
                             EmailConfirmed = false,
@@ -351,7 +351,7 @@ namespace RFP_APP.Server.Migrations
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             Rating = 0m,
-                            SecurityStamp = "7f791fc0-b972-42fe-8514-b73b023ae69b",
+                            SecurityStamp = "d30788c2-712e-4f1b-bf88-67c327e89fda",
                             TwoFactorEnabled = false,
                             UserName = "user4@example.com"
                         });
@@ -499,7 +499,7 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = 1,
                             Comment = "Excellent work!",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(506),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4144),
                             Rating = 5,
                             ReviewedUserId = "3",
                             ReviewerId = "2",
@@ -509,7 +509,7 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = 2,
                             Comment = "Good job!",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(509),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4150),
                             Rating = 4,
                             ReviewedUserId = "4",
                             ReviewerId = "3",
@@ -519,7 +519,7 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = 3,
                             Comment = "It was okay",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(511),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4152),
                             Rating = 3,
                             ReviewedUserId = "5",
                             ReviewerId = "4",
@@ -529,7 +529,7 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = 4,
                             Comment = "Not satisfied",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(513),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4154),
                             Rating = 2,
                             ReviewedUserId = "2",
                             ReviewerId = "5",
@@ -539,7 +539,7 @@ namespace RFP_APP.Server.Migrations
                         {
                             Id = 5,
                             Comment = "Terrible experience",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(514),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4156),
                             Rating = 1,
                             ReviewedUserId = "5",
                             ReviewerId = "2",
@@ -616,9 +616,9 @@ namespace RFP_APP.Server.Migrations
                             Budget = 5000m,
                             City = "New York",
                             Country = "USA",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(442),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4057),
                             CreatorId = "2",
-                            Deadline = new DateTime(2025, 4, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(443),
+                            Deadline = new DateTime(2025, 4, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4057),
                             Description = "Need a full-stack developer to build a modern website with React and ASP.NET Core.",
                             PostalCode = "10001",
                             RequestType = 1,
@@ -632,9 +632,9 @@ namespace RFP_APP.Server.Migrations
                             Budget = 10000m,
                             City = "San Francisco",
                             Country = "USA",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(456),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4070),
                             CreatorId = "3",
-                            Deadline = new DateTime(2025, 5, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(457),
+                            Deadline = new DateTime(2025, 5, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4071),
                             Description = "Looking for an experienced mobile developer to create an iOS and Android app.",
                             PostalCode = "94103",
                             RequestType = 2,
@@ -648,9 +648,9 @@ namespace RFP_APP.Server.Migrations
                             Budget = 1500m,
                             City = "Los Angeles",
                             Country = "USA",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(460),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4074),
                             CreatorId = "3",
-                            Deadline = new DateTime(2025, 4, 7, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(460),
+                            Deadline = new DateTime(2025, 4, 11, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4075),
                             Description = "Need a creative designer for logo and branding package.",
                             PostalCode = "90015",
                             RequestType = 3,
@@ -664,9 +664,9 @@ namespace RFP_APP.Server.Migrations
                             Budget = 3000m,
                             City = "Austin",
                             Country = "USA",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(467),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4085),
                             CreatorId = "4",
-                            Deadline = new DateTime(2025, 4, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(468),
+                            Deadline = new DateTime(2025, 4, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4085),
                             Description = "Need an SEO expert to improve rankings for an e-commerce store.",
                             PostalCode = "73301",
                             RequestType = 6,
@@ -680,9 +680,9 @@ namespace RFP_APP.Server.Migrations
                             Budget = 8000m,
                             City = "Washington",
                             Country = "USA",
-                            CreatedAt = new DateTime(2025, 3, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(470),
+                            CreatedAt = new DateTime(2025, 3, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4088),
                             CreatorId = "5",
-                            Deadline = new DateTime(2025, 5, 17, 8, 12, 4, 580, DateTimeKind.Utc).AddTicks(471),
+                            Deadline = new DateTime(2025, 5, 21, 5, 51, 5, 588, DateTimeKind.Utc).AddTicks(4089),
                             Description = "Seeking a cybersecurity expert to conduct a full security audit and penetration testing.",
                             PostalCode = "20001",
                             RequestType = 12,

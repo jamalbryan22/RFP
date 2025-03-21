@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
            .UseLazyLoadingProxies());  // Use lazy loading proxies here
 
 // Configure Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -70,7 +70,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
-app.Run();
 
 // Seed roles and admin user
 using (var scope = app.Services.CreateScope())
@@ -121,3 +120,4 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+app.Run();
