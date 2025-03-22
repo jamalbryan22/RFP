@@ -71,7 +71,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
-// Seed roles and admin user
+// Seed roles and users
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -87,30 +87,33 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
-    // Seed admin user
+    // Static user IDs
+    var adminId = "admin-id";
+    var user1Id = "user1-id";
+    var user2Id = "user2-id";
+
+    // Seed Admin user
     var adminEmail = builder.Configuration["AdminCredentials:Email"];
     var adminPassword = builder.Configuration["AdminCredentials:Password"];
 
-    // Check if adminEmail or adminPassword is null or empty
     if (string.IsNullOrEmpty(adminEmail) || string.IsNullOrEmpty(adminPassword))
     {
         throw new ArgumentNullException("Admin credentials are missing in the configuration.");
     }
 
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
-
     if (adminUser == null)
     {
         adminUser = new ApplicationUser
         {
+            Id = adminId,
             UserName = adminEmail,
             Email = adminEmail,
             FirstName = "Admin",
-            LastName = "Admin",
-            DateOfBirth = DateTime.UtcNow,
-            LastLogin = DateTime.UtcNow,
-            AccountCreated = DateTime.UtcNow
-
+            LastName = "User",
+            DateOfBirth = new DateTime(1980, 1, 1),
+            AccountCreated = DateTime.UtcNow,
+            LastLogin = DateTime.UtcNow
         };
 
         var result = await userManager.CreateAsync(adminUser, adminPassword);
@@ -119,5 +122,58 @@ using (var scope = app.Services.CreateScope())
             await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }
+
+    // Seed Regular User 1
+    var user1Email = "user1@example.com";
+    var user1Password = "User1@123";
+
+    var user1 = await userManager.FindByEmailAsync(user1Email);
+    if (user1 == null)
+    {
+        user1 = new ApplicationUser
+        {
+            Id = user1Id,
+            UserName = user1Email,
+            Email = user1Email,
+            FirstName = "John",
+            LastName = "Doe",
+            DateOfBirth = new DateTime(1990, 5, 20),
+            AccountCreated = DateTime.UtcNow,
+            LastLogin = DateTime.UtcNow
+        };
+
+        var result = await userManager.CreateAsync(user1, user1Password);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(user1, "User");
+        }
+    }
+
+    // Seed Regular User 2
+    var user2Email = "user2@example.com";
+    var user2Password = "User2@123";
+
+    var user2 = await userManager.FindByEmailAsync(user2Email);
+    if (user2 == null)
+    {
+        user2 = new ApplicationUser
+        {
+            Id = user2Id,
+            UserName = user2Email,
+            Email = user2Email,
+            FirstName = "Jane",
+            LastName = "Smith",
+            DateOfBirth = new DateTime(1992, 9, 15),
+            AccountCreated = DateTime.UtcNow,
+            LastLogin = DateTime.UtcNow
+        };
+
+        var result = await userManager.CreateAsync(user2, user2Password);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(user2, "User");
+        }
+    }
 }
+
 app.Run();
