@@ -15,15 +15,14 @@ namespace RFP_APP.Server.DTOs
 
         [Required]
         [StringLength(100)]
-        public required string FirstName { get; set; } 
+        public required string FirstName { get; set; }
 
         [Required]
         [StringLength(100)]
-        public required string LastName { get; set; } 
+        public required string LastName { get; set; }
 
         [Required]
         public required DateTime DateOfBirth { get; set; }
-
     }
 
     public class LoginUserDto
@@ -34,7 +33,6 @@ namespace RFP_APP.Server.DTOs
 
         [Required(ErrorMessage = "Password is required.")]
         public required string Password { get; set; }
-
         public bool RememberMe { get; set; }
     }
 }

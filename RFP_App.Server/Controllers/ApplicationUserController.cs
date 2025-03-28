@@ -50,7 +50,7 @@ public class ApplicationUserController : ControllerBase
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
-        return Ok(new { message = "User registered successfully" });
+        return StatusCode(StatusCodes.Status201Created, new { message = "User registered successfully" });
     }
 
     // Login and return JWT Token
@@ -115,7 +115,7 @@ public class ApplicationUserController : ControllerBase
         {
             throw new ArgumentNullException(nameof(user), "User cannot be null.");
         }
-        
+
         if (string.IsNullOrWhiteSpace(user.Id) || string.IsNullOrWhiteSpace(user.Email))
         {
             throw new ArgumentException("User ID and email cannot be null or empty.");
@@ -128,7 +128,7 @@ public class ApplicationUserController : ControllerBase
             throw new InvalidOperationException("Failed to retrieve user roles.");
         }
 
-        if(string.IsNullOrEmpty(user.Email))
+        if (string.IsNullOrEmpty(user.Email))
         {
             throw new ArgumentException("User email cannot be null or empty.", nameof(user.Email));
         }
@@ -144,7 +144,7 @@ public class ApplicationUserController : ControllerBase
         authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         // Validate JWT configuration settings
-        string jwtSecret = _configuration["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret is missing.");
+        string jwtSecret = _configuration["Jwt:SecretKey"] ?? throw new InvalidOperationException("JWT Secret is missing.");
         string jwtIssuer = _configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("JWT Issuer is missing.");
         string jwtAudience = _configuration["Jwt:Audience"] ?? throw new InvalidOperationException("JWT Audience is missing.");
 

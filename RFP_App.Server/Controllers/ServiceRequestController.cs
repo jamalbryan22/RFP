@@ -20,11 +20,31 @@ namespace RFP_APP.Server.Controllers
             _context = context;
         }
 
-        // GET: api/servicerequests
+        // GET: api/servicerequest
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ServiceRequest>>> GetServiceRequests()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ServiceRequestResponseDto>>> GetServiceRequests()
         {
-            var requests = await _context.ServiceRequests.ToListAsync();
+            var requests = await _context.ServiceRequests
+                .Select(sr => new ServiceRequestResponseDto
+                {
+                    Id = sr.Id,
+                    Title = sr.Title,
+                    Description = sr.Description,
+                    RequestType = sr.RequestType.ToString(),
+                    StreetAddress = sr.StreetAddress,
+                    City = sr.City,
+                    State = sr.State,
+                    PostalCode = sr.PostalCode,
+                    Country = sr.Country,
+                    Budget = sr.Budget,
+                    CreatedAt = sr.CreatedAt,
+                    Deadline = sr.Deadline,
+                    CreatorId = sr.CreatorId,
+                    CreatorFullName = sr.Creator != null ? sr.Creator.FirstName + " " + sr.Creator.LastName : null
+                })
+                .ToListAsync();
+
             return Ok(requests);
         }
 
