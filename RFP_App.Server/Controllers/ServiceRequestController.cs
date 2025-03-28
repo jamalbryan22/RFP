@@ -50,9 +50,29 @@ namespace RFP_APP.Server.Controllers
 
         // GET: api/servicerequests/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceRequest>> GetServiceRequest(int id)
+        public async Task<ActionResult<ServiceRequestResponseDto>> GetServiceRequest(int id)
         {
-            var serviceRequest = await _context.ServiceRequests.FindAsync(id);
+            var serviceRequest = await _context.ServiceRequests
+                .Where(sr => sr.Id == id)
+                .Select(sr => new ServiceRequestResponseDto
+                {
+                    Id = sr.Id,
+                    Title = sr.Title,
+                    Description = sr.Description,
+                    RequestType = sr.RequestType.ToString(),
+                    StreetAddress = sr.StreetAddress,
+                    City = sr.City,
+                    State = sr.State,
+                    PostalCode = sr.PostalCode,
+                    Country = sr.Country,
+                    Budget = sr.Budget,
+                    CreatedAt = sr.CreatedAt,
+                    Deadline = sr.Deadline,
+                    CreatorId = sr.CreatorId,
+                    CreatorFullName = sr.Creator != null ? sr.Creator.FirstName + " " + sr.Creator.LastName : null
+                })
+                .FirstOrDefaultAsync();
+
             if (serviceRequest == null)
             {
                 return NotFound(new { message = "Service request not found." });
@@ -60,6 +80,7 @@ namespace RFP_APP.Server.Controllers
 
             return Ok(serviceRequest);
         }
+
 
         // POST: api/servicerequests
         [HttpPost]
