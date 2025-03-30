@@ -35,4 +35,13 @@ namespace RFP_APP.Server.DTOs
         public required string Password { get; set; }
         public bool RememberMe { get; set; }
     }
+
+    public class UserResponseDto
+    {
+        public string Id { get; set; } = default!;
+        public string Email { get; set; } = default!;
+        public string FirstName { get; set; } = default!;
+        public string LastName { get; set; } = default!;
+        public DateTime AccountCreated { get; set; }
+    }
 }

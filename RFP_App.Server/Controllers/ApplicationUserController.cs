@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -88,10 +89,20 @@ public class ApplicationUserController : ControllerBase
     // Get all users (Admin only, JWT protected)
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetUsers()
     {
-        var users = _userManager.Users.ToList();
-        return Task.FromResult<ActionResult<IEnumerable<ApplicationUser>>>(Ok(users));
+        var users = await _userManager.Users
+            .Select(u => new UserResponseDto
+            {
+                Id = u.Id,
+                Email = u.Email!,
+                FirstName = u.FirstName!,
+                LastName = u.LastName!,
+                AccountCreated = u.AccountCreated!
+            })
+            .ToListAsync();
+
+        return Ok(users);
     }
 
     // Delete a user (Admin only, JWT protected)

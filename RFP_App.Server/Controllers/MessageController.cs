@@ -21,7 +21,7 @@ namespace RFP_APP.Server.Controllers{
 
         // Send a message
         [HttpPost]
-        public async Task<IActionResult> SendMessage([FromBody] MessageDto messageDto)
+        public async Task<IActionResult> SendMessage([FromBody] MessageResponseDto messageDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -47,16 +47,25 @@ namespace RFP_APP.Server.Controllers{
 
         // Get messages for the logged-in user
         [HttpGet("inbox")]
-        public async Task<ActionResult<IEnumerable<Message>>> GetInbox()
+        public async Task<ActionResult<IEnumerable<MessageResponseDto>>> GetInbox()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var messages = await _context.Messages
                 .Where(m => m.ReceiverId == userId)
                 .OrderByDescending(m => m.SentAt)
+                .Select(m => new MessageResponseDto
+                {
+                    Id = m.Id,
+                    Content = m.Content,
+                    ReceiverId = m.ReceiverId,
+                    ProposalId = m.ProposalId
+                })
                 .ToListAsync();
 
             return Ok(messages);
         }
+
 
         // Get sent messages for the logged-in user
         [HttpGet("sent")]
