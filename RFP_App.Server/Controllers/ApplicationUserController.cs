@@ -50,6 +50,9 @@ public class ApplicationUserController : ControllerBase
         if (!result.Succeeded)
             return BadRequest(result.Errors);
 
+        // Add user to "User" role
+        await _userManager.AddToRoleAsync(user, "User");
+
         return StatusCode(StatusCodes.Status201Created, new { message = "User registered successfully" });
     }
 
