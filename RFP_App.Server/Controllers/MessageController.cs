@@ -21,7 +21,7 @@ namespace RFP_APP.Server.Controllers{
 
         // Send a message
         [HttpPost]
-        public async Task<IActionResult> SendMessage([FromBody] MessageResponseDto messageDto)
+        public async Task<IActionResult> SendMessage([FromBody] MessageDto messageDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -47,14 +47,14 @@ namespace RFP_APP.Server.Controllers{
 
         // Get messages for the logged-in user
         [HttpGet("inbox")]
-        public async Task<ActionResult<IEnumerable<MessageResponseDto>>> GetInbox()
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetInbox()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var messages = await _context.Messages
                 .Where(m => m.ReceiverId == userId)
                 .OrderByDescending(m => m.SentAt)
-                .Select(m => new MessageResponseDto
+                .Select(m => new MessageDto
                 {
                     Id = m.Id,
                     Content = m.Content,
@@ -69,16 +69,25 @@ namespace RFP_APP.Server.Controllers{
 
         // Get sent messages for the logged-in user
         [HttpGet("sent")]
-        public async Task<ActionResult<IEnumerable<Message>>> GetSentMessages()
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetSentMessages()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var messages = await _context.Messages
                 .Where(m => m.SenderId == userId)
                 .OrderByDescending(m => m.SentAt)
+                .Select(m => new MessageDto
+                {
+                    Id = m.Id,
+                    Content = m.Content,
+                    ReceiverId = m.ReceiverId,
+                    ProposalId = m.ProposalId
+                })
                 .ToListAsync();
 
             return Ok(messages);
         }
+
 
         // Get a specific message
         [HttpGet("{id}")]

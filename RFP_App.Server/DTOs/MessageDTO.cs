@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RFP_APP.Server.DTOs
 {
-    public class MessageResponseDto
+    public class MessageDto
     {
         public int? Id { get; set; }
 
