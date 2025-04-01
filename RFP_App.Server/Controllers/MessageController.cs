@@ -91,9 +91,18 @@ namespace RFP_APP.Server.Controllers{
 
         // Get a specific message
         [HttpGet("{id}")]
-        public async Task<ActionResult<Message>> GetMessageById(int id)
+        public async Task<ActionResult<MessageDto>> GetMessageById(int id)
         {
-            var message = await _context.Messages.FindAsync(id);
+            var message = await _context.Messages
+                .Where(m => m.Id == id)
+                .Select(m => new MessageDto
+                {
+                    Id = m.Id,
+                    Content = m.Content,
+                    ReceiverId = m.ReceiverId,
+                    ProposalId = m.ProposalId
+                })
+                .FirstOrDefaultAsync();
 
             if (message == null)
                 return NotFound();
