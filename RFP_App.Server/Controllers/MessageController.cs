@@ -90,6 +90,7 @@ namespace RFP_APP.Server.Controllers{
 
 
         // Get a specific message
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<MessageDto>> GetMessageById(int id)
         {
@@ -110,18 +111,28 @@ namespace RFP_APP.Server.Controllers{
             return Ok(message);
         }
 
+        // TODO: modify logic so user can only delete their inbox/sent messages. 
         // Delete a message
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMessage(int id)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
             var message = await _context.Messages.FindAsync(id);
             if (message == null)
-                return NotFound();
+                return NotFound(new { message = "Message not found." });
+
+            // Only allow delete if user is sender/receiver OR an admin
+            if (message.SenderId != userId && message.ReceiverId != userId && !isAdmin)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "You do not have permission to delete this message." });
+            }
 
             _context.Messages.Remove(message);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { message = "Message deleted successfully." });
         }
     }
 }
