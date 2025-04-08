@@ -8,6 +8,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RFP_APP.Server.Data;
 using RFP_APP.Server.Models;
+using RFP_APP.Server.Repositories;
+using RFP_APP.Server.Repositories.Interfaces;
+using RFP_APP.Server.Services;
+using RFP_APP.Server.Services.Interfaces;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +22,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString)
            .UseLazyLoadingProxies());  // Use lazy loading proxies here
+
+// Configure Dependency Injection
+builder.Services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
+builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
+
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
