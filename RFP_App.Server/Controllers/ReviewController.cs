@@ -34,7 +34,7 @@ namespace RFP_APP.Server.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // This will return the validation error messages
+                return BadRequest(ModelState);
             }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -43,7 +43,6 @@ namespace RFP_APP.Server.Controllers
                 return Unauthorized();
             }
 
-            // Validate that the reviewer and reviewed user exist (assuming some logic for this)
             var reviewedUserExists = await _context.Users.AnyAsync(u => u.Id == reviewDto.ReviewedUserId);
             if (!reviewedUserExists)
             {
@@ -60,10 +59,10 @@ namespace RFP_APP.Server.Controllers
             {
                 Rating = reviewDto.Rating,
                 Comment = reviewDto.Comment,
-                CreatedAt = DateTime.UtcNow, // Server will set CreatedAt
-                ReviewerId = userId, // Set the reviewer to the logged-in user
-                ReviewedUserId = reviewDto.ReviewedUserId, // Set the reviewed user
-                ServiceRequestId = reviewDto.ServiceRequestId, // Set the ServiceRequestId
+                CreatedAt = DateTime.UtcNow, 
+                ReviewerId = userId, 
+                ReviewedUserId = reviewDto.ReviewedUserId, 
+                ServiceRequestId = reviewDto.ServiceRequestId, 
             };
 
             _context.Reviews.Add(review);

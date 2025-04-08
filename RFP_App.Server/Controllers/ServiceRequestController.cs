@@ -22,7 +22,6 @@ namespace RFP_APP.Server.Controllers
 
         // GET: api/servicerequest
         [HttpGet]
-        [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceRequestResponseDto>>> GetServiceRequests()
         {
             var requests = await _context.ServiceRequests

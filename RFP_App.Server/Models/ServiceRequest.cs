@@ -78,7 +78,8 @@ namespace RFP_APP.Server.Models
             Engineering = 22,
             ResearchAnalysis = 23,
             EcommerceSetup = 24,
-            BlockchainDevelopment = 25
+            BlockchainDevelopment = 25,
+            HomeImprovement = 26
         }
     }
 }
