@@ -18,5 +18,4 @@ namespace RFP_APP.Server.DTOs
 
         public DateTime? SentAt { get; set; }
     }
-
 }
