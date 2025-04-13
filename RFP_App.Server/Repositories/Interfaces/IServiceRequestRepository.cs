@@ -1,7 +1,7 @@
+using RFP_APP.Server.Models;
+
 namespace RFP_APP.Server.Repositories.Interfaces
 {
-    using RFP_APP.Server.Models;
-
     public interface IServiceRequestRepository
     {
         Task<IEnumerable<ServiceRequest>> GetAllAsync();

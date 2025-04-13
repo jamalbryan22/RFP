@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using RFP_APP.Server.Data;
+using RFP_APP.Server.Models;
+using RFP_APP.Server.Repositories.Interfaces;
+using RFP_APP.Server.Services.Interfaces;
+
 namespace RFP_APP.Server.Repositories
 {
-    using Microsoft.EntityFrameworkCore;
-    using RFP_APP.Server.Data;
-    using RFP_APP.Server.Models;
-    using RFP_APP.Server.Repositories.Interfaces;
-    using RFP_APP.Server.Services.Interfaces;
     public class ProposalRepository : IProposalRepository
     {
         private readonly ApplicationDbContext _context;

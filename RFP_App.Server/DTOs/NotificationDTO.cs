@@ -3,8 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RFP_APP.Server.DTOs
 {
-
-    //Used when creating a notification. The server sets CreatedAt and IsRead = false by default.
     public class CreateNotificationDto
     {
         [Required]
@@ -15,7 +13,6 @@ namespace RFP_APP.Server.DTOs
         public required string RecipientId { get; set; }
     }
 
-    //Used when returning notifications to the client
     public class NotificationDto
     {
         public int Id { get; set; }

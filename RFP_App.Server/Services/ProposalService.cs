@@ -1,9 +1,10 @@
+using RFP_APP.Server.DTOs;
+using RFP_APP.Server.Models;
+using RFP_APP.Server.Repositories.Interfaces;
+using RFP_APP.Server.Services.Interfaces;
+
 namespace RFP_APP.Server.Services
 {
-    using RFP_APP.Server.DTOs;
-    using RFP_APP.Server.Models;
-    using RFP_APP.Server.Repositories.Interfaces;
-    using RFP_APP.Server.Services.Interfaces;
     public class ProposalService : IProposalService
     {
         private readonly IProposalRepository _repository;

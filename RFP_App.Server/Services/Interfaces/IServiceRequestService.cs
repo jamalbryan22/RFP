@@ -1,8 +1,8 @@
+using RFP_APP.Server.DTOs;
+using RFP_APP.Server.Models;
+
 namespace RFP_APP.Server.Services.Interfaces
 {
-    using RFP_APP.Server.DTOs;
-    using RFP_APP.Server.Models;
-
     public interface IServiceRequestService
     {
         Task<IEnumerable<ServiceRequestResponseDto>> GetAllForAdminAsync();
