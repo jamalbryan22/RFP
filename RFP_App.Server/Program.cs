@@ -47,6 +47,16 @@ if (string.IsNullOrEmpty(secretKey))
 
 var key = Encoding.UTF8.GetBytes(secretKey);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5173") // Vite dev server
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    );
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -104,6 +114,7 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
