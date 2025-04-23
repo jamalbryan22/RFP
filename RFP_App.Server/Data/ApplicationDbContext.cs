@@ -83,6 +83,16 @@ namespace RFP_APP.Server.Data
                 new Message { Id = 6, Content = "SEO report attached. Let me know.", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 4 }
             );
 
+            modelBuilder.Entity<Notification>().HasData(
+                new Notification { Id = 1, Message = "You received a new proposal.", IsRead = false, CreatedAt = DateTime.UtcNow.AddDays(-4), RecipientId = "user1-id" },
+                new Notification { Id = 2, Message = "Your proposal was accepted!", IsRead = false, CreatedAt = DateTime.UtcNow.AddDays(-3), RecipientId = "user2-id" },
+                new Notification { Id = 3, Message = "New message from user2.", IsRead = true, CreatedAt = DateTime.UtcNow.AddDays(-2), RecipientId = "user1-id" },
+                new Notification { Id = 4, Message = "Service request deadline is approaching.", IsRead = false, CreatedAt = DateTime.UtcNow.AddDays(-2), RecipientId = "user2-id" },
+                new Notification { Id = 5, Message = "Review received on your profile.", IsRead = true, CreatedAt = DateTime.UtcNow.AddDays(-1), RecipientId = "user1-id" },
+                new Notification { Id = 6, Message = "Your proposal was rejected.", IsRead = false, CreatedAt = DateTime.UtcNow, RecipientId = "user2-id" },
+                new Notification { Id = 7, Message = "You have a new message from user1.", IsRead = false, CreatedAt = DateTime.UtcNow, RecipientId = "user2-id" },
+                new Notification { Id = 8, Message = "Reminder: complete your service request.", IsRead = true, CreatedAt = DateTime.UtcNow.AddHours(-6), RecipientId = "user1-id" }
+            );
         }
     }
 }
