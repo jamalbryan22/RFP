@@ -73,6 +73,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+        policy.WithOrigins("http://localhost:5173", // For local dev
+                "https://fictional-adventure-xpr7g997w62pgjq-5173.app.github.dev")// For Codespace)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials()
+    );
+});
+
 builder.Services.AddAuthorization();
 
 // Add Controllers
