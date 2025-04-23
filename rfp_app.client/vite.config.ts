@@ -5,7 +5,11 @@ import plugin from '@vitejs/plugin-react';
 // import fs from 'fs';
 // import path from 'path';
 // import child_process from 'child_process';
+<<<<<<< HEAD
 import { env } from 'process';
+=======
+// import { env } from 'process';
+>>>>>>> bd3f5db (changes trying to connect frontend and backend)
 
 // const baseFolder =
 //     env.APPDATA !== undefined && env.APPDATA !== ''
@@ -30,8 +34,8 @@ import { env } from 'process';
 //     }
 // }
 
-const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7106';
+// const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
+//     env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:7106';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -42,13 +46,13 @@ export default defineConfig({
         }
     },
     server: {
-        proxy: {
-            '^/weatherforecast': {
-                target,
-                secure: false
-            }
-        },
-        port: 5173,
+        // proxy: {
+        //     '^/weatherforecast': {
+        //         target,
+        //         secure: false
+        //     }
+        // },
+        // port: 5173,
         // https: {
         //     key: fs.readFileSync(keyFilePath),
         //     cert: fs.readFileSync(certFilePath),
