@@ -9,7 +9,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get('/notification');
+        const response = await api.get('/Notification');
         setMessage(`Welcome back! You have ${response.data.length} notifications.`);
       } catch {
         setMessage('Failed to load data.');
