@@ -26,6 +26,7 @@ namespace RFP_APP.Server.Controllers
         public async Task<ActionResult<IEnumerable<NotificationDto>>> GetNotifications()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine($"The user id in the notification controller is {userId}");
             var result = await _service.GetMyNotificationsAsync(userId!);
             return Ok(result);
         }

@@ -5,11 +5,7 @@ import plugin from '@vitejs/plugin-react';
 // import fs from 'fs';
 // import path from 'path';
 // import child_process from 'child_process';
-<<<<<<< HEAD
-import { env } from 'process';
-=======
 // import { env } from 'process';
->>>>>>> bd3f5db (changes trying to connect frontend and backend)
 
 // const baseFolder =
 //     env.APPDATA !== undefined && env.APPDATA !== ''
