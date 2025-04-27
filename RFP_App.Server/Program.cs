@@ -13,8 +13,6 @@ using RFP_APP.Server.Repositories.Interfaces;
 using RFP_APP.Server.Services;
 using RFP_APP.Server.Services.Interfaces;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure SQLite Database
@@ -66,7 +64,6 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"]
     };
 });
-
 
 // Configure CORS
 builder.Services.AddCors(options =>
