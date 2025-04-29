@@ -7,4 +7,3 @@
 #### constraints, etc.? Maybe a company is doing a job in my area already and could cut me a nice deal if I go with them.
 #### Why don't / can't we as individuals operate like companies and governments when it comes to getting work done by requesting proposals?
 #### This leads us to the RFP (Request for Proposal) repo containing a frontend React-TypeScript and backend ASP.NET web application.
-#### Best case scenario: this application revolutionizes customer and business relations and makes me a rich man. Or someone can just look at it and think I know a little bit about code and give me a job. 
