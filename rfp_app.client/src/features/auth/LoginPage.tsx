@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import { useAuth } from '../context/AuthContext';
+import api from '../../api/axios';
+import { useAuth } from '../../context/AuthContext';
+import { AxiosError } from 'axios';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -25,8 +26,9 @@ const LoginPage = () => {
       const token = response.data.token;
       setToken(token);
       navigate('/'); // Redirect to dashboard
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed.');
+    } catch (err: unknown) {
+      const axiosError  = err as AxiosError<{message:string}>;
+      setError(axiosError.response?.data?.message || 'Login failed.');
     }
   };
 
