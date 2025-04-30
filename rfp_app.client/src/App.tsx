@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-
-// Import your page components (stub them if not built yet)
+import PrivateRoute from './routes/PrivateRoute';
+import LoginPage from './features/auth/LoginPage.tsx';
 import DashboardPage from './features/dashboard/DashboardPage.tsx'; 
 import PostRequestPage from './features/requests/PostRequestPage.tsx';
 import SearchRequestsPage from './features/requests/SearchRequestsPage.tsx';
@@ -16,14 +16,30 @@ function App() {
     <>
       <NavBar />
       <Routes>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/post-request" element={<PostRequestPage />} />
-        <Route path="/search-requests" element={<SearchRequestsPage />} />
-        <Route path="/post-proposal" element={<PostProposalPage />} />
-        <Route path="/manage-proposals" element={<ManageProposalsPage />} />
-        <Route path="/messages" element={<MessagesPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
+        {/* Public Route */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <DashboardPage />
+            </PrivateRoute>
+          }
+        />
+        <Route element={<PrivateRoute children={<></>} />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/post-request" element={<PostRequestPage />} />
+          <Route path="/search-requests" element={<SearchRequestsPage />} />
+          <Route path="/post-proposal" element={<PostProposalPage />} />
+          <Route path="/manage-proposals" element={<ManageProposalsPage />} />
+          <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
+        </Route>
+
+        {/* Catch all */}
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </>

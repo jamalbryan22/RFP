@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './DashboardPage.css'; // We'll add light CSS too
+import StatCard from '../../components/StatCard/StatCard';
 
 const DashboardPage = () => {
   const userName = 'John Doe'; // TODO: Replace this with real auth data later
@@ -7,20 +8,11 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-container">
       <h1>Welcome back, {userName}!</h1>
-
+      
       <div className="stats-grid">
-        <div className="stat-card">
-          <h2>5</h2>
-          <p>Open Requests</p>
-        </div>
-        <div className="stat-card">
-          <h2>12</h2>
-          <p>Proposals Submitted</p>
-        </div>
-        <div className="stat-card">
-          <h2>3</h2>
-          <p>New Messages</p>
-        </div>
+        <StatCard title="Open Requests" count={5} />
+        <StatCard title="Proposals Submitted" count={12} />
+        <StatCard title="New Messages" count={3} />
       </div>
 
       <div className="action-buttons">

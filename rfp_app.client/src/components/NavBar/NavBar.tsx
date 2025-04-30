@@ -19,7 +19,7 @@ const NavBar = () => {
         </div>
 
         <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
-          <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
+          <li><Link to="/" onClick={toggleMenu}>Dashboard</Link></li>
           <li><Link to="/post-request" onClick={toggleMenu}>Post Request</Link></li>
           <li><Link to="/search-requests" onClick={toggleMenu}>Search Requests</Link></li>
           <li><Link to="/post-proposal" onClick={toggleMenu}>Post Proposal</Link></li>
