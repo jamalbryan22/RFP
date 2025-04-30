@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import './DashboardPage.css'; // We'll add light CSS too
 import StatCard from '../../components/StatCard/StatCard';
+import { getUserInfoFromToken } from '../../utils/getUserInfoFromToken';
+import { useAuth } from '../../context/AuthContext';
 
 const DashboardPage = () => {
-  const userName = 'John Doe'; // TODO: Replace this with real auth data later
+  const { token } = useAuth();
+  const { firstName } = token ? getUserInfoFromToken(token) : { firstName: ' ' };
+
 
   return (
     <div className="dashboard-container">
-      <h1>Welcome back, {userName}!</h1>
+      <h1>Welcome back, {firstName}!</h1>
       
       <div className="stats-grid">
         <StatCard title="Open Requests" count={5} />
