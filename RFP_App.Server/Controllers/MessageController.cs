@@ -6,7 +6,8 @@ using RFP_APP.Server.Models;
 using RFP_APP.Server.DTOs;
 using System.Security.Claims;
 
-namespace RFP_APP.Server.Controllers{
+namespace RFP_APP.Server.Controllers
+{
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -26,17 +27,18 @@ namespace RFP_APP.Server.Controllers{
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized();
 
             var message = new Message
             {
                 Content = messageDto.Content,
-                SentAt = DateTime.UtcNow, 
+                SentAt = DateTime.UtcNow,
                 SenderId = userId,
                 ReceiverId = messageDto.ReceiverId,
-                ProposalId = messageDto.ProposalId
+                ProposalId = messageDto.ProposalId,
+                IsRead = messageDto.isRead
             };
 
             _context.Messages.Add(message);

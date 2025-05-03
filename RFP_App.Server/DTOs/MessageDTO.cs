@@ -14,8 +14,10 @@ namespace RFP_APP.Server.DTOs
         [Required]
         public required string ReceiverId { get; set; }
 
-        public int? ProposalId { get; set; } 
+        public int? ProposalId { get; set; }
 
         public DateTime? SentAt { get; set; }
+
+        public Boolean isRead { get; set; } = false;
     }
 }

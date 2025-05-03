@@ -1,24 +1,59 @@
-import { Link } from 'react-router-dom';
-import './DashboardPage.css'; // We'll add light CSS too
-import StatCard from '../../components/StatCard/StatCard';
-import { getUserInfoFromToken } from '../../utils/getUserInfoFromToken';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { getUserInfoFromToken } from '../../utils/getUserInfoFromToken';
+import { fetchDashboardStats } from '../../services/dashboardService';
+import { DashboardStats } from '../../types/DashboardStats';
+import './DashboardPage.css';
 
 const DashboardPage = () => {
   const { token } = useAuth();
-  const { firstName } = token ? getUserInfoFromToken(token) : { firstName: ' ' };
+  const { firstName } = token ? getUserInfoFromToken(token) : { firstName: 'Guest' };
 
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const data = await fetchDashboardStats();
+        setStats(data);
+      } catch (error) {
+        console.error('Failed to fetch dashboard stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadStats();
+  }, []);
 
   return (
     <div className="dashboard-container">
       <h1>Welcome back, {firstName}!</h1>
-      
-      <div className="stats-grid">
-        <StatCard title="Open Requests" count={5} />
-        <StatCard title="Proposals Submitted" count={12} />
-        <StatCard title="New Messages" count={3} />
-      </div>
 
+      {loading ? (
+        <p>Loading dashboard...</p>
+      ) : stats ? (
+        <>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <h2>{stats.openRequestCount}</h2>
+              <p>Open Requests</p>
+            </div>
+            <div className="stat-card">
+              <h2>{stats.proposalCount}</h2>
+              <p>Proposals Submitted</p>
+            </div>
+            <div className="stat-card">
+              <h2>{stats.unreadMessageCount}</h2>
+              <p>Unread Messages</p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <p>Unable to load dashboard stats.</p>
+      )}
+      
       <div className="action-buttons">
         <Link to="/post-request" className="btn">
           Post a Request
@@ -36,6 +71,7 @@ const DashboardPage = () => {
           <li>Request "Mobile App Development" posted.</li>
         </ul>
       </div>
+
     </div>
   );
 };

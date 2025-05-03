@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RFP_APP.Server.Models.Enums;
 
 namespace RFP_APP.Server.Models
 {
@@ -17,6 +18,9 @@ namespace RFP_APP.Server.Models
         public required string Description { get; set; }
 
         public required ServiceRequestType RequestType { get; set; } = ServiceRequestType.General;
+
+        [Required]
+        public ServiceRequestStatus Status { get; set; } = ServiceRequestStatus.Open;
 
         // Contact & Location
         [StringLength(200)]

@@ -75,12 +75,12 @@ namespace RFP_APP.Server.Data
             );
 
             modelBuilder.Entity<Message>().HasData(
-                new Message { Id = 1, Content = "Hi, I’m interested in your portfolio project.", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 1 },
-                new Message { Id = 2, Content = "Thanks! Let’s schedule a quick call.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 1 },
-                new Message { Id = 3, Content = "Attached is my proposal draft.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 2 },
-                new Message { Id = 4, Content = "Do you also handle mobile redesigns?", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 3 },
-                new Message { Id = 5, Content = "Yes, I specialize in mobile UI/UX.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 3 },
-                new Message { Id = 6, Content = "SEO report attached. Let me know.", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 4 }
+                new Message { Id = 1, Content = "Hi, I’m interested in your portfolio project.", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 1, IsRead = false },
+                new Message { Id = 2, Content = "Thanks! Let’s schedule a quick call.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 1, IsRead = false },
+                new Message { Id = 3, Content = "Attached is my proposal draft.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 2, IsRead = false },
+                new Message { Id = 4, Content = "Do you also handle mobile redesigns?", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 3, IsRead = false },
+                new Message { Id = 5, Content = "Yes, I specialize in mobile UI/UX.", SentAt = DateTime.UtcNow, SenderId = "user1-id", ReceiverId = "user2-id", ProposalId = 3, IsRead = false },
+                new Message { Id = 6, Content = "SEO report attached. Let me know.", SentAt = DateTime.UtcNow, SenderId = "user2-id", ReceiverId = "user1-id", ProposalId = 4, IsRead = false }
             );
 
             modelBuilder.Entity<Notification>().HasData(
