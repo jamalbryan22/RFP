@@ -1,0 +1,74 @@
+.post-request-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.post-request-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.post-request-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.post-request-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.post-request-form input,
+.post-request-form textarea,
+.post-request-form select {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s ease;
+}
+
+.post-request-form input:focus,
+.post-request-form textarea:focus,
+.post-request-form select:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+.post-request-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.post-request-form button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.post-request-form button:hover {
+  background-color: #0056b3;
+}
+
+.post-request-form .error {
+  color: #d9534f;
+  text-align: center;
+  font-weight: 500;
+}

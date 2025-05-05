@@ -1,10 +1,9 @@
-import { JSX } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+const PrivateRoute = () => {
   const { token } = useAuth();
-  return token ? children : <Navigate to="/login" replace />;
+  return token ? <Outlet/> : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

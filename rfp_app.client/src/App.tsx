@@ -20,15 +20,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Protected Routes */}
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        />
-        <Route element={<PrivateRoute children={<></>} />}>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<DashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/post-request" element={<PostRequestPage />} />
           <Route path="/search-requests" element={<SearchRequestsPage />} />

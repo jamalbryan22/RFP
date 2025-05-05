@@ -62,5 +62,4 @@ namespace RFP_APP.Server.DTOs
         public string CreatorId { get; set; } = default!;
         public string? CreatorFullName { get; set; } // Optional extra info
     }
-
 }

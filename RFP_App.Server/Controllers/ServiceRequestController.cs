@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 using RFP_APP.Server.DTOs;
+using RFP_APP.Server.Models;
 using RFP_APP.Server.Services.Interfaces;
 using System.Security.Claims;
+
 
 namespace RFP_APP.Server.Controllers
 {
@@ -74,5 +77,21 @@ namespace RFP_APP.Server.Controllers
 
             return Ok(new { message = "Service request deleted successfully." });
         }
+
+        // Return request types to front end 
+        [HttpGet("request-types")]
+        public IActionResult GetRequestTypes()
+        {
+            var values = Enum.GetValues(typeof(ServiceRequest.ServiceRequestType))
+                .Cast<ServiceRequest.ServiceRequestType>()
+                .Select(rt => new
+                {
+                    value = rt.ToString(),
+                    label = Regex.Replace(rt.ToString(), "(\\B[A-Z])", " $1")
+                });
+
+            return Ok(values);
+        }
+
     }
 }
