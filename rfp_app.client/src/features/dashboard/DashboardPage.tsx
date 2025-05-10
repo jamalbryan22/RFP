@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUserInfoFromToken } from '../../utils/getUserInfoFromToken';
 import { fetchDashboardStats } from '../../services/dashboardService';
 import { DashboardStats } from '../../types/DashboardStats';
@@ -9,11 +9,16 @@ import './DashboardPage.css';
 const DashboardPage = () => {
   const { token } = useAuth();
   const { firstName } = token ? getUserInfoFromToken(token) : { firstName: 'Guest' };
-
+  const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
     const loadStats = async () => {
       try {
         const data = await fetchDashboardStats();
@@ -29,7 +34,7 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>Welcome back, {firstName}!</h1>
+      <h1>Welcome, {firstName}!</h1>
 
       {loading ? (
         <p>Loading dashboard...</p>
