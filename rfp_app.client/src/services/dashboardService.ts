@@ -1,4 +1,4 @@
-import api from '../api/axios'; // your Axios instance
+import api from '../api/axios';
 import { DashboardStats } from '../types/DashboardStats';
 
 export const fetchDashboardStats = async (): Promise<DashboardStats> => {

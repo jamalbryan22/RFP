@@ -14,6 +14,7 @@ const PrivateRoute = () => {
     
     if (decoded.exp * 1000 < Date.now()) {
       console.warn('Token expired.');
+      localStorage.removeItem('token');
       return <Navigate to="/login" />;
     }
   } catch (error) {
