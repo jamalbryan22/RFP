@@ -120,7 +120,7 @@ const PostRequestPage = () => {
           />
         </label>
         <label>
-          Deadline
+          Completion Deadline
           <input name="deadline" type="date" value={formData.deadline || ''} onChange={handleChange} />
         </label>
         <button type="submit">Submit Request</button>
