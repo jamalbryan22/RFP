@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import { fetchRequestTypes } from '../../services/serviceRequestService';
 import { RequestTypeOption, ServiceRequestCreateDto } from '../../types/ServiceRequest';
+import { ServiceRequestTypeMap } from '../../utils/enumMappings';
 import './PostRequestPage.css';
 
 
@@ -47,11 +48,12 @@ const PostRequestPage = () => {
     setError('');
 
     try {
-      const payload = {
-        ...formData,
-        budget: Number(formData.budget).toFixed(2),
-        deadline: formData.deadline ? new Date(formData.deadline).toISOString() : null,
-      };
+const payload = {
+  ...formData, 
+  requestType: ServiceRequestTypeMap[formData.requestType],
+  budget: parseFloat(formData.budget.toString()),
+  deadline: formData.deadline ? new Date(formData.deadline).toISOString() : null
+};
 
       await api.post('/servicerequest/', payload);
       navigate('/dashboard');

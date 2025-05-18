@@ -5,6 +5,7 @@ using RFP_APP.Server.DTOs;
 using RFP_APP.Server.Models;
 using RFP_APP.Server.Services.Interfaces;
 using System.Security.Claims;
+using RFP_APP.Server.Models.Enums;
 
 
 namespace RFP_APP.Server.Controllers
@@ -82,8 +83,8 @@ namespace RFP_APP.Server.Controllers
         [HttpGet("request-types")]
         public IActionResult GetRequestTypes()
         {
-            var values = Enum.GetValues(typeof(ServiceRequest.ServiceRequestType))
-                .Cast<ServiceRequest.ServiceRequestType>()
+            var values = Enum.GetValues(typeof(ServiceRequestType))
+                .Cast<ServiceRequestType>()
                 .Select(rt => new
                 {
                     value = rt.ToString(),

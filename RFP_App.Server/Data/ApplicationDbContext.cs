@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RFP_APP.Server.Models;
+using RFP_APP.Server.Models.Enums;
 
 namespace RFP_APP.Server.Data
 {
@@ -49,11 +50,11 @@ namespace RFP_APP.Server.Data
             // Add this inside OnModelCreating after seeding users and roles
 
             modelBuilder.Entity<ServiceRequest>().HasData(
-                new ServiceRequest { Id = 1, Title = "Build Personal Portfolio", Description = "React/ASP.NET portfolio site.", RequestType = ServiceRequest.ServiceRequestType.WebDevelopment, StreetAddress = "123 Elm Street", City = "New York", State = "NY", PostalCode = "10001", Country = "USA", Budget = 3000, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddMonths(1), CreatorId = "user1-id" },
-                new ServiceRequest { Id = 2, Title = "Logo Design Needed", Description = "Need creative logo and brand design.", RequestType = ServiceRequest.ServiceRequestType.GraphicDesign, StreetAddress = "456 Oak Avenue", City = "Boston", State = "MA", PostalCode = "02118", Country = "USA", Budget = 1200, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(21), CreatorId = "user2-id" },
-                new ServiceRequest { Id = 3, Title = "Mobile App UI Redesign", Description = "Redesign the UI for a food delivery app.", RequestType = ServiceRequest.ServiceRequestType.MobileAppDevelopment, StreetAddress = "789 Pine Street", City = "Chicago", State = "IL", PostalCode = "60614", Country = "USA", Budget = 4500, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddMonths(1), CreatorId = "user1-id" },
-                new ServiceRequest { Id = 4, Title = "SEO Optimization Project", Description = "Improve website traffic and Google ranking.", RequestType = ServiceRequest.ServiceRequestType.SEO, StreetAddress = "321 Maple Lane", City = "Seattle", State = "WA", PostalCode = "98101", Country = "USA", Budget = 2500, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(30), CreatorId = "user2-id" },
-                new ServiceRequest { Id = 5, Title = "Content Writing for Blog", Description = "Need engaging articles for tech blog.", RequestType = ServiceRequest.ServiceRequestType.ContentWriting, StreetAddress = "654 Birch Blvd", City = "Austin", State = "TX", PostalCode = "73301", Country = "USA", Budget = 1800, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(14), CreatorId = "user1-id" }
+                new ServiceRequest { Id = 1, Title = "Build Personal Portfolio", Description = "React/ASP.NET portfolio site.", RequestType =ServiceRequestType.WebDevelopment, StreetAddress = "123 Elm Street", City = "New York", State = "NY", PostalCode = "10001", Country = "USA", Budget = 3000, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddMonths(1), CreatorId = "user1-id" },
+                new ServiceRequest { Id = 2, Title = "Logo Design Needed", Description = "Need creative logo and brand design.", RequestType = ServiceRequestType.GraphicDesign, StreetAddress = "456 Oak Avenue", City = "Boston", State = "MA", PostalCode = "02118", Country = "USA", Budget = 1200, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(21), CreatorId = "user2-id" },
+                new ServiceRequest { Id = 3, Title = "Mobile App UI Redesign", Description = "Redesign the UI for a food delivery app.", RequestType = ServiceRequestType.MobileAppDevelopment, StreetAddress = "789 Pine Street", City = "Chicago", State = "IL", PostalCode = "60614", Country = "USA", Budget = 4500, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddMonths(1), CreatorId = "user1-id" },
+                new ServiceRequest { Id = 4, Title = "SEO Optimization Project", Description = "Improve website traffic and Google ranking.", RequestType = ServiceRequestType.SEO, StreetAddress = "321 Maple Lane", City = "Seattle", State = "WA", PostalCode = "98101", Country = "USA", Budget = 2500, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(30), CreatorId = "user2-id" },
+                new ServiceRequest { Id = 5, Title = "Content Writing for Blog", Description = "Need engaging articles for tech blog.", RequestType = ServiceRequestType.ContentWriting, StreetAddress = "654 Birch Blvd", City = "Austin", State = "TX", PostalCode = "73301", Country = "USA", Budget = 1800, CreatedAt = DateTime.UtcNow, Deadline = DateTime.UtcNow.AddDays(14), CreatorId = "user1-id" }
             );
 
             modelBuilder.Entity<Proposal>().HasData(

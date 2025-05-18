@@ -15,7 +15,7 @@ export interface ServiceRequestCreateDto {
    value: string;
    label: string;
  }
- 
+
  export type ServiceRequestType =
    | 'General'
    | 'WebDevelopment'
@@ -44,4 +44,4 @@ export interface ServiceRequestCreateDto {
    | 'EcommerceSetup'
    | 'BlockchainDevelopment'
    | 'HomeImprovement';
- 
+   

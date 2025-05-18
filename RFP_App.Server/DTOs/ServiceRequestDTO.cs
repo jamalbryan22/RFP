@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using static RFP_APP.Server.Models.ServiceRequest;
+using RFP_APP.Server.Models.Enums;
 
 namespace RFP_APP.Server.DTOs
 {
