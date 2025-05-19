@@ -20,6 +20,44 @@ namespace RFP_APP.Server.Services
             return requests.Select(MapToDto);
         }
 
+        public async Task<IEnumerable<ServiceRequestResponseDto>> GetAllAsync()
+            {
+            var requests = await _repository.GetAllAsync();
+            return requests.Select(MapToDto);
+            }
+
+        public async Task<IEnumerable<ServiceRequestResponseDto>> SearchAsync(
+            string? query,
+            string? type,
+            string? city,
+            string? state,
+            decimal? minBudget,
+            DateTime? deadline)
+        {
+            var requests = await _repository.GetAllAsync(); 
+
+            if (!string.IsNullOrEmpty(query))
+                requests = requests.Where(r => r.Title.Contains(query) || r.Description.Contains(query)).ToList();
+
+            if (!string.IsNullOrEmpty(type))
+                requests = requests.Where(r => r.RequestType.ToString() == type).ToList();
+
+            if (!string.IsNullOrEmpty(city))
+                requests = requests.Where(r => r.City == city).ToList();
+
+            if (!string.IsNullOrEmpty(state))
+                requests = requests.Where(r => r.State == state).ToList();
+
+            if (minBudget.HasValue)
+                requests = requests.Where(r => r.Budget >= minBudget.Value).ToList();
+
+            if (deadline.HasValue)
+                requests = requests.Where(r => r.Deadline <= deadline.Value).ToList();
+
+            return requests.Select(MapToDto);
+        }
+
+
         public async Task<IEnumerable<ServiceRequestResponseDto>> GetMyRequestsAsync(string userId)
         {
             var requests = await _repository.GetByUserIdAsync(userId);

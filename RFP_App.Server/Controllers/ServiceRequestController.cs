@@ -36,6 +36,21 @@ namespace RFP_APP.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchServiceRequests(
+            [FromQuery] string? query,
+            [FromQuery] string? type,
+            [FromQuery] string? city,
+            [FromQuery] string? state,
+            [FromQuery] decimal? minBudget,
+            [FromQuery] DateTime? deadline)
+        {
+            var result = await _service.SearchAsync(query, type, city, state, minBudget, deadline);
+            return Ok(result);
+        }
+
+
+
         // GET: api/servicerequest/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceRequestResponseDto>> GetRequestById(int id)

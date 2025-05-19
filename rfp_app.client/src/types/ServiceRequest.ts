@@ -11,6 +11,20 @@ export interface ServiceRequestCreateDto {
    deadline?: string; // ISO string format (converted from Date)
  }
 
+ export interface ServiceRequestSearchResult {
+   id: number;
+   title: string;
+   description: string;
+   requestType: string;
+   streetAddress?: string;
+   city: string;
+   state: string;
+   postalCode: string;
+   country: string;
+   budget: number;
+   deadline?: string;
+}
+
  export interface RequestTypeOption {
    value: string;
    label: string;
