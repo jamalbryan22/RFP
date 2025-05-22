@@ -15,7 +15,9 @@ const NavBar = () => {
         </Link>
 
         <div className="menu-icon" onClick={toggleMenu}>
-          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i> {/* You can replace with SVG or Unicode */}
+          <div className="menu-icon" onClick={toggleMenu}>
+            {isOpen ? '✖' : '☰'}
+          </div>
         </div>
 
         <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>

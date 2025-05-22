@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import PrivateRoute from './routes/PrivateRoute';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import LoginPage from './features/auth/LoginPage.tsx';
 import DashboardPage from './features/dashboard/DashboardPage.tsx'; 
 import PostRequestPage from './features/requests/PostRequestPage.tsx';

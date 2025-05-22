@@ -32,9 +32,11 @@
     </ProjectReference>
   </ItemGroup>
 
-  <Target Name="BuildClientApp" AfterTargets="Build">
-    <Exec Command="npm install --prefix ../rfp_app.client" />
-    <Exec Command="npm run build --prefix ../rfp_app.client" />
-  </Target>
+
+<Target Name="BuildClientApp" AfterTargets="Build">
+  <Exec Command="npm install" WorkingDirectory="..\rfp_app.client" />
+  <Exec Command="npm run build" WorkingDirectory="..\rfp_app.client" />
+</Target>
+
 
 </Project>
