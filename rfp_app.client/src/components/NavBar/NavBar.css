@@ -1,71 +1,112 @@
 /* Mobile-first base */
 .navbar {
-    background: #333;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-    width: 90%;
-    max-width: 1200px;
-  }
-  
+  background: #333;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  width: 90%;
+  max-width: 1200px;
+  position: relative;
+}
+
+.navbar-logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Hamburger icon (visible on mobile only) */
+.menu-icon {
+  display: block;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Hide menu by default on mobile */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Show menu when toggled */
+.nav-menu.active {
+  display: flex;
+}
+
+.nav-menu li {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.nav-menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
   .navbar-logo {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-    align-self: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  
+
   .menu-icon {
     display: block;
-    font-size: 1.8rem;
-    color: #fff;
-    cursor: pointer;
   }
-  
-  .nav-menu {
+}
+
+/* Desktop view */
+@media screen and (min-width: 768px) {
+  .menu-icon {
     display: none;
-    flex-direction: column;
-    list-style: none;
-    text-align: center;
   }
-  
-  .nav-menu.active {
-    display: flex;
+
+  .navbar-logo {
+    display: block;
   }
-  
+
+  .nav-menu {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    background: none;
+    box-shadow: none;
+  }
+
   .nav-menu li {
-    margin: 10px 0;
+    margin: 0 15px;
   }
-  
+
   .nav-menu li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
-  
-  /* Desktop view */
-  @media screen and (min-width: 768px) {
-    .menu-icon {
-      display: none;
-    }
-  
-    .nav-menu {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-  
-    .nav-menu li {
-      margin: 0 15px;
-    }
-  }
-  
+}
