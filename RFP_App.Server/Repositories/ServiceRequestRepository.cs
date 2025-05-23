@@ -15,6 +15,11 @@ namespace RFP_APP.Server.Repositories
             _context = context;
         }
 
+        public IQueryable<ServiceRequest> AsQueryable()
+        {
+            return _context.ServiceRequests;
+        }
+
         public async Task<IEnumerable<ServiceRequest>> GetAllAsync()
         {
             return await _context.ServiceRequests

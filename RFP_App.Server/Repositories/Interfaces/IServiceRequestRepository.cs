@@ -10,5 +10,6 @@ namespace RFP_APP.Server.Repositories.Interfaces
         Task AddAsync(ServiceRequest request);
         Task UpdateAsync(ServiceRequest request);
         Task DeleteAsync(ServiceRequest request);
+        IQueryable<ServiceRequest> AsQueryable();
     }
 }

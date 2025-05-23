@@ -4,6 +4,7 @@ namespace RFP_APP.Server.Services
     using RFP_APP.Server.Models;
     using RFP_APP.Server.Repositories.Interfaces;
     using RFP_APP.Server.Services.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class ServiceRequestService : IServiceRequestService
     {
@@ -34,28 +35,51 @@ namespace RFP_APP.Server.Services
             decimal? minBudget,
             DateTime? deadline)
         {
-            var requests = await _repository.GetAllAsync(); 
+            var requests = _repository.AsQueryable();
 
             if (!string.IsNullOrEmpty(query))
-                requests = requests.Where(r => r.Title.Contains(query) || r.Description.Contains(query)).ToList();
+            {
+                var likePattern = $"%{query}%";
+                requests = requests.Where(r =>
+                    EF.Functions.Like(r.Title, likePattern) ||
+                    EF.Functions.Like(r.Description, likePattern));
+            }
 
             if (!string.IsNullOrEmpty(type))
-                requests = requests.Where(r => r.RequestType.ToString() == type).ToList();
+            {
+                var likeType = type; 
+                requests = requests.Where(r =>
+                    EF.Functions.Like(r.RequestType.ToString(), likeType));
+            }
 
             if (!string.IsNullOrEmpty(city))
-                requests = requests.Where(r => r.City == city).ToList();
+            {
+                var likeCity = city;
+                requests = requests.Where(r =>
+                    EF.Functions.Like(r.City, likeCity));
+            }
 
             if (!string.IsNullOrEmpty(state))
-                requests = requests.Where(r => r.State == state).ToList();
+            {
+                var likeState = state;
+                requests = requests.Where(r =>
+                    EF.Functions.Like(r.State, likeState));
+            }
 
             if (minBudget.HasValue)
-                requests = requests.Where(r => r.Budget >= minBudget.Value).ToList();
+            {
+                requests = requests.Where(r => r.Budget >= minBudget.Value);
+            }
 
             if (deadline.HasValue)
-                requests = requests.Where(r => r.Deadline <= deadline.Value).ToList();
+            {
+                requests = requests.Where(r => r.Deadline <= deadline.Value);
+            }
 
-            return requests.Select(MapToDto);
+            var result = await requests.ToListAsync();
+            return result.Select(MapToDto);
         }
+
 
 
         public async Task<IEnumerable<ServiceRequestResponseDto>> GetMyRequestsAsync(string userId)
