@@ -5,6 +5,7 @@ namespace RFP_APP.Server.Services
     using RFP_APP.Server.Repositories.Interfaces;
     using RFP_APP.Server.Services.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using RFP_APP.Server.Models.Enums;
 
     public class ServiceRequestService : IServiceRequestService
     {
@@ -22,10 +23,10 @@ namespace RFP_APP.Server.Services
         }
 
         public async Task<IEnumerable<ServiceRequestResponseDto>> GetAllAsync()
-            {
+        {
             var requests = await _repository.GetAllAsync();
             return requests.Select(MapToDto);
-            }
+        }
 
         public async Task<IEnumerable<ServiceRequestResponseDto>> SearchAsync(
             string? query,
@@ -45,25 +46,21 @@ namespace RFP_APP.Server.Services
                     EF.Functions.Like(r.Description, likePattern));
             }
 
-            if (!string.IsNullOrEmpty(type))
+            if (!string.IsNullOrEmpty(type) && Enum.TryParse<ServiceRequestType>(type, out var parsedType))
             {
-                var likeType = type; 
-                requests = requests.Where(r =>
-                    EF.Functions.Like(r.RequestType.ToString(), likeType));
+                requests = requests.Where(r => r.RequestType == parsedType);
             }
 
             if (!string.IsNullOrEmpty(city))
             {
-                var likeCity = city;
                 requests = requests.Where(r =>
-                    EF.Functions.Like(r.City, likeCity));
+                    EF.Functions.Like(r.City, city));
             }
 
             if (!string.IsNullOrEmpty(state))
             {
-                var likeState = state;
                 requests = requests.Where(r =>
-                    EF.Functions.Like(r.State, likeState));
+                    EF.Functions.Like(r.State, state));
             }
 
             if (minBudget.HasValue)
