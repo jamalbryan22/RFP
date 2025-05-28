@@ -26,6 +26,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/post-request" element={<PostRequestPage />} />
           <Route path="/search-requests" element={<SearchRequestsPage />} />
+          <Route path="/service-requests/:id" element={<ServiceRequestDetailPage />} />
           <Route path="/post-proposal" element={<PostProposalPage />} />
           <Route path="/manage-proposals" element={<ManageProposalsPage />} />
           <Route path="/messages" element={<MessagesPage />} />

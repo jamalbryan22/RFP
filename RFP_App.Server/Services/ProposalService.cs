@@ -66,6 +66,7 @@ namespace RFP_APP.Server.Services
             return new ProposalResponseDto
             {
                 Id = p.Id,
+                ServiceRequestTitle = p.ServiceRequest.Title,
                 Description = p.Description,
                 BidAmount = p.BidAmount,
                 SubmittedAt = p.SubmittedAt,
@@ -74,5 +75,5 @@ namespace RFP_APP.Server.Services
                 CreatorId = p.CreatorId
             };
         }
-    } 
+    }
 }

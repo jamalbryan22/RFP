@@ -20,6 +20,7 @@ namespace RFP_APP.Server.DTOs
     public class ProposalResponseDto
     {
         public int Id { get; set; }
+        public string ServiceRequestTitle { get; set; }
         public string Description { get; set; } = string.Empty;
         public decimal BidAmount { get; set; }
         public DateTime SubmittedAt { get; set; }
