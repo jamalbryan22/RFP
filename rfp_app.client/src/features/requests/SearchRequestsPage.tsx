@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import api from '../../api/axios';
-import './SearchRequestsPage.css';
-import { ServiceRequestTypeMap } from '../../utils/enumMappings';
-import { ServiceRequestSearchResult} from '../../types/ServiceRequest';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import api from "../../api/axios";
+import "./SearchRequestsPage.css";
+import { ServiceRequestTypeMap } from "../../utils/enumMappings";
+import { ServiceRequestSearchResult } from "../../types/ServiceRequest";
 
 const SearchRequestsPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [requestType, setRequestType] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [minBudget, setMinBudget] = useState('');
-  const [deadline, setDeadline] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [requestType, setRequestType] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [minBudget, setMinBudget] = useState("");
+  const [deadline, setDeadline] = useState("");
   const [results, setResults] = useState<ServiceRequestSearchResult[]>([]);
 
   const handleSearch = async () => {
     try {
-      const response = await api.get('/servicerequest/search', {
+      const response = await api.get("/servicerequest/search", {
         params: {
           query: searchTerm,
           type: requestType,
@@ -28,7 +28,7 @@ const SearchRequestsPage = () => {
       });
       setResults(response.data);
     } catch (error) {
-      console.error('Search failed:', error);
+      console.error("Search failed:", error);
     }
   };
 
@@ -64,25 +64,39 @@ const SearchRequestsPage = () => {
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}
       />
-      <select onChange={(e) => setRequestType(e.target.value)} value={requestType}>
-      <option value="">All Types</option>
-      {Object.keys(ServiceRequestTypeMap).map((type) => (
-        <option key={type} value={type}>
-          {type.replace(/([A-Z])/g, ' $1').trim()}
-        </option>
-      ))}
-    </select>
+      <select
+        onChange={(e) => setRequestType(e.target.value)}
+        value={requestType}
+      >
+        <option value="">All Types</option>
+        {Object.keys(ServiceRequestTypeMap).map((type) => (
+          <option key={type} value={type}>
+            {type.replace(/([A-Z])/g, " $1").trim()}
+          </option>
+        ))}
+      </select>
 
       <button onClick={handleSearch}>Search</button>
 
       <div className="search-results">
         {results.map((request) => (
           <div key={request.id} className="search-item">
-            <h3>{request.title}</h3>
+            <h3>
+              <Link to={`/service-requests/${request.id}`}>
+                {request.title}
+              </Link>
+            </h3>
             <p>{request.description}</p>
-            <span>{request.city}, {request.state}</span>
+            <span>
+              {request.city}, {request.state}
+            </span>
             <p>Budget: ${request.budget}</p>
-           <p>Deadline: {request.deadline ? new Date(request.deadline).toLocaleDateString() : "No Deadline"}</p>
+            <p>
+              Deadline:{" "}
+              {request.deadline
+                ? new Date(request.deadline).toLocaleDateString()
+                : "No Deadline"}
+            </p>
           </div>
         ))}
       </div>

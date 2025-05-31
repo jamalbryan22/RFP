@@ -4,19 +4,20 @@ import axios from "axios";
 
 const ServiceRequestDetailPage = () => {
   const { id } = useParams();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [request, setRequest] = useState<any>(null);
   const [proposalContent, setProposalContent] = useState("");
   const [proposalBudget, setProposalBudget] = useState("");
 
   useEffect(() => {
-    axios.get(`/api/servicerequests/${id}`).then((res) => setRequest(res.data));
+    axios.get(`/api/servicerequest/${id}`).then((res) => setRequest(res.data));
   }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await axios.post("/api/proposal", {
-      description: proposalContent,
-      bidAmount: parseFloat(proposalBudget),
+    await axios.post("/api/proposals", {
+      descrption: proposalContent,
+      budget: parseFloat(proposalBudget),
       serviceRequestId: id,
     });
     // Optional: redirect or show confirmation
@@ -26,14 +27,14 @@ const ServiceRequestDetailPage = () => {
 
   return (
     <div>
-      <h2>{request.title}</h2>
-      <p>{request.description}</p>
+      <h2>{request.Title}</h2>
+      <p>{request.Description}</p>
       <p>
-        <strong>Budget:</strong> ${request.budget}
+        <strong>Budget:</strong> ${request.Budget}
       </p>
       <p>
         <strong>Deadline:</strong>{" "}
-        {new Date(request.deadline).toLocaleDateString()}
+        {new Date(request.Deadline).toLocaleDateString()}
       </p>
 
       <hr />
