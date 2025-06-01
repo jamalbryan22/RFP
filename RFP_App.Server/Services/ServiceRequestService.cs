@@ -90,9 +90,6 @@ namespace RFP_APP.Server.Services
             var request = await _repository.GetByIdAsync(id);
             if (request == null) return null;
 
-            if (!isAdmin && request.CreatorId != userId)
-                return null;
-
             return MapToDto(request);
         }
 
