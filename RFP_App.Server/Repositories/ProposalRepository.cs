@@ -51,5 +51,17 @@ namespace RFP_APP.Server.Repositories
             _context.Proposals.Remove(proposal);
             await _context.SaveChangesAsync();
         }
+
+        public IQueryable<Proposal> Query()
+        {
+            return _context.Proposals.AsQueryable();
+        }
+
+        public async Task<Proposal?> GetByIdWithRequestAsync(int id)
+        {
+            return await _context.Proposals
+                .Include(p => p.ServiceRequest)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

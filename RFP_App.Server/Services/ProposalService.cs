@@ -48,7 +48,11 @@ namespace RFP_APP.Server.Services
             };
 
             await _repository.AddAsync(proposal);
-            return MapToDto(proposal);
+
+            var savedProposal = await _repository.GetByIdWithRequestAsync(proposal.Id)
+                ?? throw new Exception("Failed to retrieve proposal after creation.");
+
+            return MapToDto(savedProposal);
         }
 
         public async Task<bool> DeleteAsync(int id, string userId, bool isAdmin)
@@ -66,7 +70,7 @@ namespace RFP_APP.Server.Services
             return new ProposalResponseDto
             {
                 Id = p.Id,
-                ServiceRequestTitle = p.ServiceRequest.Title,
+                ServiceRequestTitle = p.ServiceRequest?.Title ?? "(Unknown)",
                 Description = p.Description,
                 BidAmount = p.BidAmount,
                 SubmittedAt = p.SubmittedAt,
