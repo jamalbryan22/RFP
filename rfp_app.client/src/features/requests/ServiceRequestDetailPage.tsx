@@ -8,6 +8,7 @@ const ServiceRequestDetailPage = () => {
   const [request, setRequest] = useState<any>(null);
   const [proposalContent, setProposalContent] = useState("");
   const [proposalBudget, setProposalBudget] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   useEffect(() => {
     api.get(`/servicerequest/${id}`).then((res) => {
@@ -17,11 +18,19 @@ const ServiceRequestDetailPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await api.post("/api/proposals", {
-      description: proposalContent,
-      bidAmount: parseFloat(proposalBudget),
-      serviceRequestId: id,
-    });
+    try {
+      await api.post("/proposal", {
+        description: proposalContent,
+        bidAmount: parseFloat(proposalBudget),
+        serviceRequestId: id,
+      });
+      setConfirmationMessage("✅ Proposal submitted successfully!");
+      setProposalContent("");
+      setProposalBudget("");
+    } catch (error) {
+      console.error("Proposal submission failed:", error);
+      setConfirmationMessage("❌ Failed to submit proposal. Please try again.");
+    }
   };
 
   if (!request) return <div>Loading...</div>;
@@ -47,6 +56,9 @@ const ServiceRequestDetailPage = () => {
 
       <hr />
 
+      {confirmationMessage && (
+        <p className="confirmation-message">{confirmationMessage}</p>
+      )}
       <h3>Submit Your Proposal</h3>
       <form className="proposal-form" onSubmit={handleSubmit}>
         <div className="form-row">
