@@ -1,0 +1,53 @@
+.my-request-page {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.request-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.request-card {
+  flex: 0 0 calc(50% - 0.5rem); /* two cards per row with gap */
+  max-width: calc(50% - 0.5rem);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.request-card h3 {
+  margin-top: 0;
+}
+
+.manage-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.manage-link:hover {
+  background-color: #0056b3;
+}
+
+#status-filter {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .request-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

@@ -136,6 +136,7 @@ namespace RFP_APP.Server.Services
                 Description = sr.Description,
                 RequestType = sr.RequestType.ToString(),
                 StreetAddress = sr.StreetAddress,
+                Status = sr.Status.ToString(),
                 City = sr.City,
                 State = sr.State,
                 PostalCode = sr.PostalCode,

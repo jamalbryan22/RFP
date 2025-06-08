@@ -37,6 +37,8 @@ namespace RFP_APP.Server.Models
     {
         Pending,
         Accepted,
-        Rejected
+        Rejected,
+        Cancelled,
+        Completed
     }
 }

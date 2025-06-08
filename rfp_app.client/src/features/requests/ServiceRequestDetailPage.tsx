@@ -1,18 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
-import "./ServiceRequestDetailPage.css"; // Add this line
+import { ServiceRequestResponseDto } from "../../types/ServiceRequest";
+import "./ServiceRequestDetailPage.css";
 
 const ServiceRequestDetailPage = () => {
   const { id } = useParams();
-  const [request, setRequest] = useState<any>(null);
+  const [serviceRequest, setServiceRequest] = useState<ServiceRequestResponseDto>();
   const [proposalContent, setProposalContent] = useState("");
   const [proposalBudget, setProposalBudget] = useState("");
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
   useEffect(() => {
     api.get(`/servicerequest/${id}`).then((res) => {
-      setRequest(res.data);
+      setServiceRequest(res.data);
     });
   }, [id]);
 
@@ -33,25 +34,25 @@ const ServiceRequestDetailPage = () => {
     }
   };
 
-  if (!request) return <div>Loading...</div>;
+  if (!serviceRequest) return <div>Loading...</div>;
 
   return (
     <div className="request-detail">
       <p>
-        <strong>Title:</strong> {request.title}
+        <strong>Title:</strong> {serviceRequest.title}
       </p>
       <p>
-        <strong>Description:</strong> {request.description}
+        <strong>Description:</strong> {serviceRequest.description}
       </p>
       <p>
-        <strong>Budget:</strong> ${request.budget}
+        <strong>Budget:</strong> ${serviceRequest.budget}
       </p>
       <p>
         <strong>Deadline:</strong>{" "}
-        {new Date(request.deadline).toLocaleDateString()}
+        {new Date(serviceRequest.deadline).toLocaleDateString()}
       </p>
       <p>
-        <strong>Creator:</strong> {request.creatorFullName}
+        <strong>Creator:</strong> {serviceRequest.creatorFullName}
       </p>
 
       <hr />
