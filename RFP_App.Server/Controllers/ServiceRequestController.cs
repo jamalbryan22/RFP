@@ -16,10 +16,12 @@ namespace RFP_APP.Server.Controllers
     public class ServiceRequestController : ControllerBase
     {
         private readonly IServiceRequestService _service;
+        private readonly IProposalService _proposalService;
 
-        public ServiceRequestController(IServiceRequestService service)
+        public ServiceRequestController(IServiceRequestService service, IProposalService proposalService)
         {
             _service = service;
+            _proposalService = proposalService;
         }
 
         // GET: api/servicerequest (admin = all, user = theirs only)
@@ -109,5 +111,17 @@ namespace RFP_APP.Server.Controllers
             return Ok(values);
         }
 
+
+        // GET: api/servicerequest/{id}/proposals
+        // This endpoint returns all proposals for a specific service request
+        [HttpGet("{id}/proposals")]
+        public async Task<ActionResult<IEnumerable<ProposalResponseDto>>> GetProposalsForServiceRequest(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole("Admin");
+
+            var proposals = await _proposalService.GetByServiceRequestIdAsync(id, userId!, isAdmin);
+            return Ok(proposals);
+        }
     }
 }

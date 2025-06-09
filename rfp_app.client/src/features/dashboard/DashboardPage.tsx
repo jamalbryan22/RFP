@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { getUserInfoFromToken } from '../../utils/getUserInfoFromToken';
-import { fetchDashboardStats } from '../../services/dashboardService';
-import { DashboardStats } from '../../types/DashboardStats';
-import './DashboardPage.css';
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { getUserInfoFromToken } from "../../utils/getUserInfoFromToken";
+import { fetchDashboardStats } from "../../services/dashboardService";
+import { DashboardStats } from "../../types/DashboardStats";
+import "./DashboardPage.css";
 
 const DashboardPage = () => {
   const { token } = useAuth();
-  const { firstName } = token ? getUserInfoFromToken(token) : { firstName: 'Guest' };
+  const { firstName } = token
+    ? getUserInfoFromToken(token)
+    : { firstName: "Guest" };
   const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!token) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
@@ -24,12 +26,13 @@ const DashboardPage = () => {
         const data = await fetchDashboardStats();
         setStats(data);
       } catch (error) {
-        console.error('Failed to fetch dashboard stats:', error);
+        console.error("Failed to fetch dashboard stats:", error);
       } finally {
         setLoading(false);
       }
     };
     loadStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,7 +61,7 @@ const DashboardPage = () => {
       ) : (
         <p>Unable to load dashboard stats.</p>
       )}
-      
+
       <div className="action-buttons">
         <Link to="/post-request" className="btn">
           Post a Request
@@ -76,7 +79,6 @@ const DashboardPage = () => {
           <li>Request "Mobile App Development" posted.</li>
         </ul>
       </div>
-
     </div>
   );
 };

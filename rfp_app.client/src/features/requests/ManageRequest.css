@@ -1,0 +1,27 @@
+.manage-request-page {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.request-details {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.proposal-list {
+  list-style: none;
+  padding: 0;
+}
+
+.proposal-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}

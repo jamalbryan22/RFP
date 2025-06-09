@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import {jwtDecode} from 'jwt-decode';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useEffect, useContext } from "react";
+import { jwtDecode } from "jwt-decode";
 
 interface AuthContextType {
   token: string | null;
@@ -7,10 +8,10 @@ interface AuthContextType {
 }
 
 interface DecodedToken {
-  exp: number; 
+  exp: number;
 }
 
-const TOKEN_KEY = 'rfp_app_authToken';
+const TOKEN_KEY = "rfp_app_authToken";
 
 export const storeToken = (token: string) => {
   localStorage.setItem(TOKEN_KEY, token);
@@ -35,13 +36,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const decoded: DecodedToken = jwtDecode(token);
 
         if (decoded.exp * 1000 > Date.now()) {
-          storeToken(token); 
+          storeToken(token);
         } else {
-          console.warn('Token is expired.');
+          console.warn("Token is expired.");
           handleTokenInvalidation();
         }
       } catch (error) {
-        console.error('Invalid token format.', error);
+        console.error("Invalid token format.", error);
         handleTokenInvalidation();
       }
     } else {
@@ -63,6 +64,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
+  if (!context) throw new Error("useAuth must be used within AuthProvider");
   return context;
 };

@@ -63,5 +63,14 @@ namespace RFP_APP.Server.Repositories
                 .Include(p => p.ServiceRequest)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task<List<Proposal>> GetByServiceRequestIdAsync(int requestId)
+        {
+            return await _context.Proposals
+                .Where(p => p.ServiceRequestId == requestId)
+                .Include(p => p.ServiceRequest)
+                .Include(p => p.Creator)
+                .ToListAsync();
+        }
     }
 }

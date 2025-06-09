@@ -15,5 +15,6 @@ namespace RFP_APP.Server.Repositories.Interfaces
         Task DeleteAsync(Proposal proposal);
         IQueryable<Proposal> Query();
         Task<Proposal?> GetByIdWithRequestAsync(int id);
+        Task<List<Proposal>> GetByServiceRequestIdAsync(int requestId);
     }
 }

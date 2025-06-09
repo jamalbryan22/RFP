@@ -65,6 +65,19 @@ namespace RFP_APP.Server.Services
             return true;
         }
 
+        public async Task<IEnumerable<ProposalResponseDto>> GetByServiceRequestIdAsync(int requestId, string userId, bool isAdmin)
+        {
+            if (requestId <= 0)
+                throw new ArgumentException("Invalid service request ID.", nameof(requestId));
+            if (string.IsNullOrEmpty(userId))
+                throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
+
+            var proposals = await _repository.GetByServiceRequestIdAsync(requestId!);
+            if (!isAdmin) proposals = proposals.Where(p => p.ServiceRequest!.CreatorId == userId).ToList();
+            return proposals.Select(MapToDto);
+        }
+
+
         private ProposalResponseDto MapToDto(Proposal p)
         {
             return new ProposalResponseDto
