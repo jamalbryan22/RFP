@@ -74,7 +74,7 @@ namespace RFP_APP.Server.Services
                 Description = p.Description,
                 BidAmount = p.BidAmount,
                 SubmittedAt = p.SubmittedAt,
-                Status = p.Status,
+                Status = p.Status.ToString(),
                 ServiceRequestId = p.ServiceRequestId,
                 CreatorId = p.CreatorId
             };

@@ -24,7 +24,7 @@ namespace RFP_APP.Server.DTOs
         public string Description { get; set; } = string.Empty;
         public decimal BidAmount { get; set; }
         public DateTime SubmittedAt { get; set; }
-        public ProposalStatus Status { get; set; }
+        public string Status { get; set; } = default!;
         public int ServiceRequestId { get; set; }
         public required string CreatorId { get; set; }
     }

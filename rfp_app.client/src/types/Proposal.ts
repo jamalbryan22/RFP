@@ -1,9 +1,11 @@
+// import { StatementResultingChanges } from "node:sqlite";
+
 export interface ProposalResponseDto {
   id: number;
   serviceRequestTitle: string;
   description: string;
   submittedAt: string; // ISO string format
-  status: ProposalStatus;
+  status: string;
   bidAmount: number;
   serviceRequestId: number;
   creatorId: string;
