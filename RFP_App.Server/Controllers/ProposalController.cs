@@ -67,10 +67,29 @@ namespace RFP_APP.Server.Controllers
             var isAdmin = User.IsInRole("Admin");
 
             var success = await _proposalService.DeleteAsync(id, userId!, isAdmin);
-             if (!success)
+            if (!success)
                 return Forbid();
 
             return Ok(new { message = "Proposal deleted successfully." });
         }
+
+        // PUT: api/proposal/{id}/accept
+        [HttpPut("{id}/accept")]
+        public async Task<IActionResult> AcceptProposal(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var success = await _proposalService.UpdateStatusAsync(id, userId!, ProposalStatus.Accepted);
+            return success ? Ok(new { message = "Proposal accepted." }) : Forbid();
+        }
+
+        // PUT: api/proposal/{id}/reject
+        [HttpPut("{id}/reject")]
+        public async Task<IActionResult> RejectProposal(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var success = await _proposalService.UpdateStatusAsync(id, userId!, ProposalStatus.Rejected);
+            return success ? Ok(new { message = "Proposal rejected." }) : Forbid();
+        }
+
     }
 }
