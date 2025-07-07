@@ -11,5 +11,6 @@ namespace RFP_APP.Server.Services.Interfaces
         Task<ProposalResponseDto> CreateAsync(ProposalCreateDto dto, string userId);
         Task<bool> DeleteAsync(int id, string userId, bool isAdmin);
         Task<IEnumerable<ProposalResponseDto>> GetByServiceRequestIdAsync(int requestId, string userId, bool isAdmin);
+        Task<bool> UpdateStatusAsync(int id, string userId, ProposalStatus newStatus);
     }
 }

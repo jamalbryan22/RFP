@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using RFP_APP.Server.DTOs;
 using RFP_APP.Server.Services.Interfaces;
-using System.Security.Claims;
+using  RFP_APP.Server.Models;
 
 namespace RFP_APP.Server.Controllers
 {

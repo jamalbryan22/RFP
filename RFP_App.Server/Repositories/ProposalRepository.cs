@@ -72,5 +72,16 @@ namespace RFP_APP.Server.Repositories
                 .Include(p => p.Creator)
                 .ToListAsync();
         }
+
+        public async Task UpdateAsync(Proposal proposal)
+        {
+            _context.Proposals.Update(proposal);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

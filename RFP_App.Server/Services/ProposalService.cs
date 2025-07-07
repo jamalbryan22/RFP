@@ -77,6 +77,31 @@ namespace RFP_APP.Server.Services
             return proposals.Select(MapToDto);
         }
 
+        public async Task<bool> UpdateStatusAsync(int id, string userId, ProposalStatus newStatus)
+        {
+            var proposal = await _repository.GetByIdWithRequestAsync(id);
+            if (proposal == null || proposal.CreatorId == userId) return false;
+
+            if (newStatus == ProposalStatus.Accepted)
+            {
+                // Reject all other proposals for the same ServiceRequest
+                var relatedProposals = await _repository.GetByServiceRequestIdAsync(proposal.ServiceRequestId);
+                foreach (var p in relatedProposals)
+                {
+                    if (p.Id != id)
+                        p.Status = ProposalStatus.Rejected;
+                }
+
+                proposal.Status = ProposalStatus.Accepted;
+                await _repository.SaveChangesAsync(); 
+                return true;
+            }
+
+            // For simple rejections
+            proposal.Status = newStatus;
+            await _repository.UpdateAsync(proposal);
+            return true;
+        }
 
         private ProposalResponseDto MapToDto(Proposal p)
         {

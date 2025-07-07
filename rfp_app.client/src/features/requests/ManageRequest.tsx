@@ -13,6 +13,26 @@ const ManageRequest = () => {
   const [proposals, setProposals] = useState<ProposalResponseDto[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const handleDecision = async (id: number, action: "accept" | "reject") => {
+    const confirmed = window.confirm(
+      `Are you sure you want to ${action} this proposal?`,
+    );
+    if (!confirmed) return;
+
+    try {
+      await api.put(`/proposal/${id}/${action}`);
+      setProposals((prev) =>
+        prev.map((p) =>
+          p.id === id
+            ? { ...p, status: action === "accept" ? "Accepted" : "Rejected" }
+            : p,
+        ),
+      );
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   useEffect(() => {
     if (!requestId) return;
 
@@ -84,7 +104,12 @@ const ManageRequest = () => {
               <p>
                 <strong>By:</strong> {proposal.creatorId}
               </p>
-              {/* Action buttons like Accept/Reject could go here in future */}
+              {proposal.status === "Pending" && (
+                <div className="proposal-actions">
+                  <button onClick={() => handleDecision(proposal.id, "accept")}>✅ Accept</button>
+                  <button onClick={() => handleDecision(proposal.id, "reject")}>❌ Reject</button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
