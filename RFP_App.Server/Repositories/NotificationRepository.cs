@@ -40,6 +40,24 @@ namespace RFP_APP.Server.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public IQueryable<Notification> Query()
+        {
+            return _context.Notifications.AsQueryable();
+        }
+
+        public async Task UpdateAsync(Notification notification)
+        {
+            _context.Notifications.Update(notification);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Notification>> GetAllAsync()
+        {
+            return await _context.Notifications
+                .OrderByDescending(n => n.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();

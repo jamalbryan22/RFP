@@ -6,12 +6,8 @@ using RFP_APP.Server.Services.Interfaces;
 
 namespace RFP_APP.Server.Repositories.Interfaces
 {
-    public interface IReviewRepository
+    public interface IReviewRepository: IBaseRepository<Review>
     {
-        Task<IEnumerable<Review>> GetAllAsync();
         Task<IEnumerable<Review>> GetByReviewerIdAsync(string reviewerId);
-        Task<Review?> GetByIdAsync(int id);
-        Task AddAsync(Review review);
-        Task DeleteAsync(Review review);
     }
 }

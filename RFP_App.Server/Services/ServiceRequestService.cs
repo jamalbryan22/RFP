@@ -36,7 +36,7 @@ namespace RFP_APP.Server.Services
             decimal? minBudget,
             DateTime? deadline)
         {
-            var requests = _repository.AsQueryable();
+            var requests = _repository.Query();
 
             if (!string.IsNullOrEmpty(query))
             {

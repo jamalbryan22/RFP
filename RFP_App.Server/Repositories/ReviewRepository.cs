@@ -54,5 +54,22 @@ namespace RFP_APP.Server.Repositories
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateAsync(Review review)
+        {
+            _context.Reviews.Update(review);
+            await _context.SaveChangesAsync();
+        }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public IQueryable<Review> Query()
+        {
+            return _context.Reviews
+                .Include(r => r.Reviewer)
+                .Include(r => r.ReviewedUser)
+                .Include(r => r.ServiceRequest);
+        }
     }
 }

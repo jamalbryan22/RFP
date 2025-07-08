@@ -6,12 +6,8 @@ using RFP_APP.Server.Services.Interfaces;
 
 namespace RFP_APP.Server.Repositories.Interfaces
 {
-    public interface INotificationRepository
+    public interface INotificationRepository: IBaseRepository<Notification>
     {
         Task<IEnumerable<Notification>> GetByRecipientIdAsync(string recipientId);
-        Task<Notification?> GetByIdAsync(int id);
-        Task AddAsync(Notification notification);
-        Task DeleteAsync(Notification notification);
-        Task SaveChangesAsync();
     }
 }
