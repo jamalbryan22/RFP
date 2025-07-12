@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { NumericFormat } from "react-number-format";
 import api from "../../api/axios";
 import { AxiosError } from "axios";
 import { fetchRequestTypes } from "../../services/serviceRequestService";
@@ -135,13 +136,71 @@ const PostRequestPage = () => {
         </label>
         <label>
           State
-          <input
+          <select
             name="state"
-            placeholder="e.g. CA"
             value={formData.state}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select a state</option>
+            {[
+              "AL",
+              "AK",
+              "AZ",
+              "AR",
+              "CA",
+              "CO",
+              "CT",
+              "DC",
+              "DE",
+              "FL",
+              "GA",
+              "HI",
+              "ID",
+              "IL",
+              "IN",
+              "IA",
+              "KS",
+              "KY",
+              "LA",
+              "ME",
+              "MD",
+              "MA",
+              "MI",
+              "MN",
+              "MS",
+              "MO",
+              "MT",
+              "NE",
+              "NV",
+              "NH",
+              "NJ",
+              "NM",
+              "NY",
+              "NC",
+              "ND",
+              "OH",
+              "OK",
+              "OR",
+              "PA",
+              "RI",
+              "SC",
+              "SD",
+              "TN",
+              "TX",
+              "UT",
+              "VT",
+              "VA",
+              "WA",
+              "WV",
+              "WI",
+              "WY",
+            ].map((abbr) => (
+              <option key={abbr} value={abbr}>
+                {abbr}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Postal Code
@@ -155,30 +214,34 @@ const PostRequestPage = () => {
         </label>
         <label>
           Country
-          <input
+          <select
             name="country"
-            placeholder="e.g. United States"
             value={formData.country}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select a country</option>
+            <option value="United States">United States</option>
+          </select>
         </label>
         <label>
           Budget (USD)
-          <input
-            name="budget"
-            type="text"
-            placeholder="e.g. 1500.00"
-            value={formData.budget.toString()}
-            onChange={(e) => {
-              const input = e.target.value;
-              const parsed = parseFloat(input);
+          <NumericFormat
+            thousandSeparator={true}
+            prefix={"$"}
+            placeholder="e.g. 1,500.00"
+            value={formData.budget}
+            onValueChange={(values) => {
+              const { floatValue } = values;
               setFormData((prev) => ({
                 ...prev,
-                budget: isNaN(parsed) || parsed < 0 ? 0 : parsed,
+                budget: floatValue || 0,
               }));
             }}
-            required
+            allowNegative={false}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            className="your-input-class" // Optional: styling
           />
         </label>
         <label>
