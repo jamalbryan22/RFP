@@ -109,4 +109,19 @@
   .nav-menu li a {
     font-size: 1rem;
   }
+
+  .signout-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .signout-button:hover {
+    color: #0056b3;
+  }
+
 }
