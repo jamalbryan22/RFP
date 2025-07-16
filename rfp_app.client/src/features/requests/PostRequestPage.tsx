@@ -10,6 +10,8 @@ import {
 } from "../../types/ServiceRequest";
 import { ServiceRequestTypeMap } from "../../utils/enumMappings";
 import "./PostRequestPage.css";
+import { toast } from 'react-toastify';
+
 
 const PostRequestPage = () => {
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const PostRequestPage = () => {
   });
   const [error, setError] = useState("");
 
-  // 🔁 Load request types on mount
+  //Load service request types on mount
   useEffect(() => {
     const loadTypes = async () => {
       try {
@@ -66,7 +68,8 @@ const PostRequestPage = () => {
       };
 
       await api.post("/servicerequest/", payload);
-      navigate("/dashboard");
+      toast.success("Service request posted successfully!");
+      navigate("/my-service-requests");
     } catch (err: unknown) {
       if (err instanceof AxiosError)
         setError(err.response?.data?.message || "Request submission failed.");

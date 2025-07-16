@@ -14,11 +14,14 @@ import MessagesPage from "./features/messages/MessagesPage.tsx";
 import ProfilePage from "./features/profile/ProfilePage.tsx";
 import AdminDashboardPage from "./features/admin/AdminDashboardPage.tsx";
 import ServiceRequestDetailPage from "./features/requests/ServiceRequestDetailPage.tsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <NavBar />
+      <ToastContainer position="top-center" autoClose={3000} />
       <Routes>
         {/* Public Route */}
         <Route path="/login" element={<LoginPage />} />
@@ -41,7 +44,6 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin" element={<AdminDashboardPage />} />
         </Route>
-
         {/* Catch all */}
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>

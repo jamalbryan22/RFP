@@ -10,3 +10,12 @@
   <Exec Command="npm install" WorkingDirectory="..\rfp_app.client" />
   <Exec Command="npm run build" WorkingDirectory="..\rfp_app.client" />
 </Target>
+
+TODO: 
+Service Request View page needs the budget formatted to contain commmads
+Need to create a more strutured proposal form - need react-number-format for proposal budget input 
+need a redirect on proposal submission could be to the home page or to all open proposals page 
+all proposals are appearing twice on proposal page 
+proposal withdraw modal should display yes, instead of ok 
+need to add 'withdrawn' proposals to the filter by status on the my proposals page. 
+finish messaging functionality 
