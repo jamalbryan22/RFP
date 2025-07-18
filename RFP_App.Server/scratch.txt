@@ -19,3 +19,11 @@ all proposals are appearing twice on proposal page
 proposal withdraw modal should display yes, instead of ok 
 need to add 'withdrawn' proposals to the filter by status on the my proposals page. 
 finish messaging functionality 
+on proposal submit redirect
+on proposal submit format budget 
+on signout redirect 
+while being signed out, sign out button should disappear 
+need to change all proposals to reject upon acccepting a proposal 
+proposal 
+admin dashboard option in nav should only appear when logged in as admin  
+need to improve user filtering abilites for all returned collections in the UI
