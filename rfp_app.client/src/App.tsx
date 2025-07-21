@@ -11,7 +11,7 @@ import SearchRequestsPage from "./features/requests/SearchRequestsPage.tsx";
 import PostProposalPage from "./features/proposals/PostProposalPage.tsx";
 import ManageProposalsPage from "./features/proposals/ManageProposalsPage.tsx";
 import MessagesPage from "./features/messages/MessagesPage.tsx";
-import ProfilePage from "./features/profile/ProfilePage.tsx";
+import UserProfilePage from "./features/profile/UserProfilePage.tsx";
 import AdminDashboardPage from "./features/admin/AdminDashboardPage.tsx";
 import ServiceRequestDetailPage from "./features/requests/ServiceRequestDetailPage.tsx";
 import { ToastContainer } from "react-toastify";
@@ -41,7 +41,7 @@ function App() {
           <Route path="/post-proposal" element={<PostProposalPage />} />
           <Route path="/manage-proposals" element={<ManageProposalsPage />} />
           <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/:id" element={<UserProfilePage />} />
           <Route path="/admin" element={<AdminDashboardPage />} />
         </Route>
         {/* Catch all */}

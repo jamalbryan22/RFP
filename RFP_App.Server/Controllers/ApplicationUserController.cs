@@ -86,6 +86,39 @@ public class ApplicationUserController : ControllerBase
         });
     }
 
+    
+    [HttpGet("profile/{id}")]
+    public async Task<ActionResult<UserProfileDto>> GetUserProfile(string id)
+    {
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+        if (user == null)
+            return NotFound();
+
+        var dto = new UserProfileDto
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            DateOfBirth = user.DateOfBirth,
+            ProfilePictureUrl = user.ProfilePictureUrl,
+            Bio = user.Bio,
+            Rating = user.Rating,
+            NumberOfCompletedServiceRequest = user.NumberOfCompletedServiceRequest,
+            ActiveBids = user.ActiveBids,
+            StreetAddress = user.StreetAddress,
+            City = user.City,
+            State = user.State,
+            PostalCode = user.PostalCode,
+            Country = user.Country,
+            LastLogin = user.LastLogin,
+            AccountCreated = user.AccountCreated
+        };
+
+        return Ok(dto);
+    }
+
+
+
     // Get all users (Admin only, JWT protected)
     [Authorize(Roles = "Admin")]
     [HttpGet]
