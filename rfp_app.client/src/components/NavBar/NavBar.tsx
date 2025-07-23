@@ -2,11 +2,20 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./NavBar.css";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../../types/JwtPayload";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setToken } = useAuth();
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token"); // or sessionStorage if that's where you store it
+if (token) {
+  const decoded = jwtDecode<JwtPayload>(token);
+  const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+  console.log(userId);
+}
 
   const toggleMenu = () => setIsOpen(!isOpen);
 

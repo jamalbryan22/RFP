@@ -28,7 +28,7 @@ namespace RFP_APP.Server.Models
       [Range(0, 5)]
       public decimal Rating { get; set; }  // Average rating from completed RFPs  
 
-      // [Range(0, int.MaxValue)]
+      [Range(0, int.MaxValue)]
       public int NumberOfCompletedServiceRequest { get; set; }  // Number of successfully closed RFPs  
 
       [Range(0, int.MaxValue)]
