@@ -9,8 +9,9 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setToken } = useAuth();
   const navigate = useNavigate();
+  const { userId } = useAuth();
 
-  const token = localStorage.getItem("token"); // or sessionStorage if that's where you store it
+  const token = localStorage.getItem("token");
 if (token) {
   const decoded = jwtDecode<JwtPayload>(token);
   const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
@@ -42,7 +43,7 @@ if (token) {
           <li><Link to="/my-service-requests" onClick={toggleMenu}>My Request</Link></li>
           <li><Link to="/manage-proposals" onClick={toggleMenu}>Manage Proposals</Link></li>
           <li><Link to="/messages" onClick={toggleMenu}>Messages</Link></li>
-          <li><Link to="/profile" onClick={toggleMenu}>Profile</Link></li>
+          <li><Link to={`/profile/${userId}`} onClick={toggleMenu}>Profile</Link></li>
           <li><Link to="/admin" onClick={toggleMenu}>Admin Dashboard</Link></li>
           <li><button className="signout-button" onClick={handleSignOut}>Sign Out</button></li>
         </ul>
