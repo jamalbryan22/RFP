@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { NumericFormat } from "react-number-format";
 import api from "../../api/axios";
 import { ServiceRequestResponseDto } from "../../types/ServiceRequest";
 import "./ServiceRequestDetailPage.css";
@@ -45,14 +46,18 @@ const ServiceRequestDetailPage = () => {
         <strong>Description:</strong> {serviceRequest.description}
       </p>
       <p>
-        <strong>Budget:</strong> ${serviceRequest.budget}
+        <strong>Budget:</strong> <NumericFormat
+          value={serviceRequest.budget}
+          displayType="text"
+          thousandSeparator={true}
+          prefix="$"/>
       </p>
       <p>
         <strong>Deadline:</strong>{" "}
         {new Date(serviceRequest.deadline).toLocaleDateString()}
       </p>
       <p>
-        <strong>Creator:</strong> {serviceRequest.creatorFullName}
+        <strong>Creator:</strong> <a href={`/profile/${serviceRequest.creatorId}`}>{serviceRequest.creatorFullName}</a>
       </p>
 
       <hr />

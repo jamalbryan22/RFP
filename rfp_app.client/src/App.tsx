@@ -24,11 +24,10 @@ function App() {
       <ToastContainer position="top-center" autoClose={3000} />
       <Routes>
         {/* Public Route */}
+        <Route path="/" element={<DashboardPage />} />
         <Route path="/login" element={<LoginPage />} />
-
         {/* Protected Routes */}
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<DashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/post-request" element={<PostRequestPage />} />
           <Route path="/search-requests" element={<SearchRequestsPage />} />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { NumericFormat } from "react-number-format";
 import api from "../../api/axios";
 import { ServiceRequestResponseDto } from "../../types/ServiceRequest";
 import { ProposalResponseDto } from "../../types/Proposal";
@@ -65,7 +66,13 @@ const ManageRequest = () => {
         <h3>{request.title}</h3>
         <p>{request.description}</p>
         <p>
-          <strong>Budget:</strong> ${request.budget}
+          <strong>Budget:</strong>
+          <NumericFormat
+            value={request.budget}
+            displayType="text"
+            thousandSeparator={true}
+            prefix="$"
+          />
         </p>
         <p>
           <strong>Deadline:</strong>{" "}
@@ -74,9 +81,41 @@ const ManageRequest = () => {
         <p>
           <strong>Status:</strong> {request.status}
         </p>
-        <p>
-          <strong>Created By:</strong> {request.creatorFullName}
-        </p>
+        <div className="request-actions">
+          <button
+            onClick={() => {
+              if (
+                window.confirm("Are you sure you want to edit this request?")
+              ) {
+                window.location.href = `/edit-request?id=${request.id}`;
+              }
+            }}
+          >
+            Edit Request
+          </button>
+
+          <button
+            onClick={() => {
+              if (
+                window.confirm("Are you sure you want to delete this request?")
+              ) {
+                api.delete(`/servicerequest/${request.id}`)
+                  .then(() => {
+                    alert("Service request deleted successfully.");
+                    window.location.href = "/requests"; // Redirect to requests list
+                  })
+                  .catch((error) => {
+                    console.error("Failed to delete request", error);
+                    alert(
+                      "Failed to delete service request. Please try again.",
+                    );
+                  });
+              }
+            }}
+          >
+            Delete Request
+          </button>
+        </div>
       </div>
 
       <hr />

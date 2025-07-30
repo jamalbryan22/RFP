@@ -18,7 +18,8 @@ User2@123
 </Target>
 
 TODO: 
-Service Request View page needs the budget formatted and to contain crud commmads
+create crud commmads for my-Request page
+create /edit-request?id=${request.id}
 Service Request Card ui data overflow needs to be constrained to card. 
 Need to create a more strutured proposal form - need react-number-format for proposal budget input 
 need a redirect on proposal submission could be to the home page or to all open proposals page 
@@ -34,4 +35,5 @@ need to change all proposals to reject upon acccepting a proposal
 proposal 
 admin dashboard option in nav should only appear when logged in as admin  
 need to improve user filtering abilites for all returned collections in the UI
-on landing page shouldn't prompt for login on login page
+shouldn't be able to submit proposals to own SR
+Edit Profile/User Info buttons/page
