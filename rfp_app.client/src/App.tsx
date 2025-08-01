@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/layout/NavBar.tsx";
 import PrivateRoute from "./routes/PrivateRoute";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import LoginPage from "./features/auth/LoginPage.tsx";

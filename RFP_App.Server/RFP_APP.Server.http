@@ -1,6 +1,1 @@
 @RFP_APP.Server_HostAddress = http://localhost:5067
-
-GET {{RFP_APP.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
