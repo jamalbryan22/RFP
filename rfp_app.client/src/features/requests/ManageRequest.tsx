@@ -99,7 +99,8 @@ const ManageRequest = () => {
               if (
                 window.confirm("Are you sure you want to delete this request?")
               ) {
-                api.delete(`/servicerequest/${request.id}`)
+                api
+                  .delete(`/servicerequest/${request.id}`)
                   .then(() => {
                     alert("Service request deleted successfully.");
                     window.location.href = "/requests"; // Redirect to requests list
@@ -145,8 +146,12 @@ const ManageRequest = () => {
               </p>
               {proposal.status === "Pending" && (
                 <div className="proposal-actions">
-                  <button onClick={() => handleDecision(proposal.id, "accept")}>✅ Accept</button>
-                  <button onClick={() => handleDecision(proposal.id, "reject")}>❌ Reject</button>
+                  <button onClick={() => handleDecision(proposal.id, "accept")}>
+                    ✅ Accept
+                  </button>
+                  <button onClick={() => handleDecision(proposal.id, "reject")}>
+                    ❌ Reject
+                  </button>
                 </div>
               )}
             </li>

@@ -12,11 +12,14 @@ const NavBar = () => {
   const { userId } = useAuth();
 
   const token = localStorage.getItem("token");
-if (token) {
-  const decoded = jwtDecode<JwtPayload>(token);
-  const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-  console.log(userId);
-}
+  if (token) {
+    const decoded = jwtDecode<JwtPayload>(token);
+    const userId =
+      decoded[
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+      ];
+    console.log(userId);
+  }
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -37,15 +40,53 @@ if (token) {
         </div>
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
-          <li><Link to="/" onClick={toggleMenu}>Dashboard</Link></li>
-          <li><Link to="/post-request" onClick={toggleMenu}>Post Request</Link></li>
-          <li><Link to="/search-requests" onClick={toggleMenu}>Search Requests</Link></li>
-          <li><Link to="/my-service-requests" onClick={toggleMenu}>My Request</Link></li>
-          <li><Link to="/manage-proposals" onClick={toggleMenu}>Manage Proposals</Link></li>
-          <li><Link to="/messages" onClick={toggleMenu}>Messages</Link></li>
-          <li><Link to={`/profile/${userId}`} onClick={toggleMenu}>Profile</Link></li>
-          <li><Link to="/admin" onClick={toggleMenu}>Admin Dashboard</Link></li>
-          <li><button className="signout-button" onClick={handleSignOut}>Sign Out</button></li>
+          <li>
+            <Link to="/" onClick={toggleMenu}>
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link to="/post-request" onClick={toggleMenu}>
+              Post Request
+            </Link>
+          </li>
+          <li>
+            <Link to="/search-requests" onClick={toggleMenu}>
+              Search Requests
+            </Link>
+          </li>
+          <li>
+            <Link to="/my-service-requests" onClick={toggleMenu}>
+              My Request
+            </Link>
+          </li>
+          <li>
+            <Link to="/manage-proposals" onClick={toggleMenu}>
+              Manage Proposals
+            </Link>
+          </li>
+          <li>
+            <Link to="/messages" onClick={toggleMenu}>
+              Messages
+            </Link>
+          </li>
+          <li>
+            <Link to={`/profile/${userId}`} onClick={toggleMenu}>
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin" onClick={toggleMenu}>
+              Admin Dashboard
+            </Link>
+          </li>
+          {userId && (
+            <li>
+              <button className="signout-button" onClick={handleSignOut}>
+                Sign Out
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

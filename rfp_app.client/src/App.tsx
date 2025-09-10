@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import NavBar from "./components/layout/NavBar.tsx";
 import PrivateRoute from "./routes/PrivateRoute";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import LoginPage from "./features/auth/LoginPage.tsx";
@@ -16,36 +15,39 @@ import AdminDashboardPage from "./features/admin/AdminDashboardPage.tsx";
 import ServiceRequestDetailPage from "./features/requests/ServiceRequestDetailPage.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MainLayout from "./components/layout/MainLayout";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <ToastContainer position="top-center" autoClose={3000} />
-      <Routes>
-        {/* Public Route */}
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        {/* Protected Routes */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/post-request" element={<PostRequestPage />} />
-          <Route path="/search-requests" element={<SearchRequestsPage />} />
-          <Route
-            path="/service-requests/:id"
-            element={<ServiceRequestDetailPage />}
-          />
-          <Route path="/my-service-requests" element={<MyServiceRequest />} />
-          <Route path="/manage-request" element={<ManageRequest />} />
-          <Route path="/post-proposal" element={<PostProposalPage />} />
-          <Route path="/manage-proposals" element={<ManageProposalsPage />} />
-          <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/profile/:id" element={<UserProfilePage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
-        </Route>
-        {/* Catch all */}
-        <Route path="*" element={<div>404 Not Found</div>} />
-      </Routes>
+      <MainLayout>
+        <ToastContainer position="top-center" autoClose={3000} />
+
+        <Routes>
+          {/* Public Route */}
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          {/* Protected Routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/post-request" element={<PostRequestPage />} />
+            <Route path="/search-requests" element={<SearchRequestsPage />} />
+            <Route
+              path="/service-requests/:id"
+              element={<ServiceRequestDetailPage />}
+            />
+            <Route path="/my-service-requests" element={<MyServiceRequest />} />
+            <Route path="/manage-request" element={<ManageRequest />} />
+            <Route path="/post-proposal" element={<PostProposalPage />} />
+            <Route path="/manage-proposals" element={<ManageProposalsPage />} />
+            <Route path="/messages" element={<MessagesPage />} />
+            <Route path="/profile/:id" element={<UserProfilePage />} />
+            <Route path="/admin" element={<AdminDashboardPage />} />
+          </Route>
+          {/* Catch all */}
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+      </MainLayout>
     </>
   );
 }
