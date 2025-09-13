@@ -26,7 +26,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh flex flex-col">
-      <header className="sticky top-0 z-10 bg-[--color-surface] border-b">
+      <header className="fixed inset-x-0 top-0 z-50 bg-[var(--color-surface)] border-b shadow-sm">
         <div className="container h-14 flex items-center justify-between">
           <Link to="/" className="font-semibold">
             RFP Portal
@@ -77,11 +77,11 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 pt-14">
         <div className="container py-6">{children}</div>
       </main>
 
-      <footer className="border-t bg-[--color-surface]">
+      <footer className="border-t bg-[var(--color-surface)]">
         <div className="container py-4 text-sm text-slate-500">
           © {new Date().getFullYear()} RFP Portal
         </div>
