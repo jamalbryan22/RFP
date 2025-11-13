@@ -11,7 +11,7 @@ using RFP_APP.Server.Data;
 namespace RFP_APP.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250322081327_InitialCreate")]
+    [Migration("20251112143414_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -174,9 +174,6 @@ namespace RFP_APP.Server.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CompletedProjects")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
@@ -221,6 +218,9 @@ namespace RFP_APP.Server.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("NumberOfCompletedServiceRequest")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -281,6 +281,9 @@ namespace RFP_APP.Server.Migrations
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("ProposalId")
                         .HasColumnType("INTEGER");
@@ -455,6 +458,9 @@ namespace RFP_APP.Server.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("StreetAddress")
                         .HasMaxLength(200)

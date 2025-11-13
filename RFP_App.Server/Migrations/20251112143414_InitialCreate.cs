@@ -36,7 +36,7 @@ namespace RFP_APP.Server.Migrations
                     ProfilePictureUrl = table.Column<string>(type: "TEXT", nullable: true),
                     Bio = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
                     Rating = table.Column<decimal>(type: "TEXT", nullable: false),
-                    CompletedProjects = table.Column<int>(type: "INTEGER", nullable: false),
+                    NumberOfCompletedServiceRequest = table.Column<int>(type: "INTEGER", nullable: false),
                     ActiveBids = table.Column<int>(type: "INTEGER", nullable: false),
                     StreetAddress = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
@@ -202,6 +202,7 @@ namespace RFP_APP.Server.Migrations
                     Title = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
                     RequestType = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
                     StreetAddress = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     State = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
@@ -299,7 +300,8 @@ namespace RFP_APP.Server.Migrations
                     SentAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     SenderId = table.Column<string>(type: "TEXT", nullable: false),
                     ReceiverId = table.Column<string>(type: "TEXT", nullable: false),
-                    ProposalId = table.Column<int>(type: "INTEGER", nullable: true)
+                    ProposalId = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsRead = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

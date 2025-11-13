@@ -12,6 +12,7 @@ using RFP_APP.Server.Repositories;
 using RFP_APP.Server.Repositories.Interfaces;
 using RFP_APP.Server.Services;
 using RFP_APP.Server.Services.Interfaces;
+using RFP_APP.Server.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,9 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IIdentitySeeder, IdentitySeeder>();
+builder.Services.AddScoped<IAppDataSeeder, AppDataSeeder>();
+
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -70,7 +74,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
         policy.WithOrigins("http://localhost:5173", // For local dev
-                "https://fictional-adventure-xpr7g997w62pgjq-5173.app.github.dev")// For Codespace)
+                "https://friendly-fishstick-g7qx5469w45cp9wp-5173.app.github.dev")// For Codespace)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
@@ -134,110 +138,7 @@ app.MapControllers();
 // Seed roles and users
 using (var scope = app.Services.CreateScope())
 {
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    // Seed roles
-    string[] roles = { "Admin", "User" };
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-    }
-
-    // Static user IDs
-    var adminId = "admin-id";
-    var user1Id = "user1-id";
-    var user2Id = "user2-id";
-
-    // Seed Admin user
-    var adminEmail = builder.Configuration["AdminCredentials:Email"];
-    var adminPassword = builder.Configuration["AdminCredentials:Password"];
-
-    if (string.IsNullOrEmpty(adminEmail) || string.IsNullOrEmpty(adminPassword))
-    {
-        throw new ArgumentNullException("Admin credentials are missing in the configuration.");
-    }
-
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
-    {
-        adminUser = new ApplicationUser
-        {
-            Id = adminId,
-            UserName = adminEmail,
-            Email = adminEmail,
-            FirstName = "Admin",
-            LastName = "User",
-            DateOfBirth = new DateTime(1980, 1, 1),
-            AccountCreated = DateTime.UtcNow,
-            LastLogin = DateTime.UtcNow
-        };
-
-        var result = await userManager.CreateAsync(adminUser, adminPassword);
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(adminUser, "Admin");
-        }
-    }
-
-    // Seed Regular User 1
-    var user1Email = "user1@example.com";
-    var user1Password = "User1@123";
-
-    var user1 = await userManager.FindByEmailAsync(user1Email);
-    if (user1 == null)
-    {
-        user1 = new ApplicationUser
-        {
-            Id = user1Id,
-            UserName = user1Email,
-            Email = user1Email,
-            FirstName = "John",
-            LastName = "Doe",
-            Bio = "A John Doe's user profile",
-            DateOfBirth = new DateTime(1990, 5, 20),
-            ProfilePictureUrl = "/profile-pictures/JohnDoe.png",
-            AccountCreated = DateTime.UtcNow,
-            LastLogin = DateTime.UtcNow
-        };
-
-        var result = await userManager.CreateAsync(user1, user1Password);
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(user1, "User");
-        }
-    }
-
-    // Seed Regular User 2
-    var user2Email = "user2@example.com";
-    var user2Password = "User2@123";
-
-    var user2 = await userManager.FindByEmailAsync(user2Email);
-    if (user2 == null)
-    {
-        user2 = new ApplicationUser
-        {
-            Id = user2Id,
-            UserName = user2Email,
-            Email = user2Email,
-            FirstName = "Jane",
-            LastName = "Smith",
-            Bio = "A Jane Smith's user profile",
-            ProfilePictureUrl = "/profile-pictures/JaneSmith.png",
-            DateOfBirth = new DateTime(1992, 9, 15),
-            AccountCreated = DateTime.UtcNow,
-            LastLogin = DateTime.UtcNow
-        };
-
-        var result = await userManager.CreateAsync(user2, user2Password);
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(user2, "User");
-        }
-    }
+    await scope.ServiceProvider.MigrateAndSeedAsync(); 
 }
 
 app.Run();
